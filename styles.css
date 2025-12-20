@@ -76,6 +76,18 @@ button:focus-visible {
   box-shadow: 0 0 0 4px rgba(122, 183, 255, 0.32);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .background-accent {
   position: fixed;
   inset: 0;
@@ -269,10 +281,12 @@ main {
   border-radius: 999px;
   border: 1px solid var(--border);
   background: linear-gradient(120deg, rgba(122, 183, 255, 0.12), rgba(183, 255, 92, 0.12));
+  color: var(--text);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 0.82rem;
+  text-decoration: none;
 }
 
 .pill-date {
@@ -280,6 +294,19 @@ main {
   color: #0b0f1c;
   border-color: transparent;
   box-shadow: 0 14px 26px rgba(183, 255, 92, 0.24), 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.pill-soft {
+  background: rgba(255, 255, 255, 0.06);
+  border-style: dashed;
+  color: var(--muted);
+  box-shadow: none;
+}
+
+.pill-goodreads {
+  color: #f3e8dc;
+  border-color: rgba(243, 232, 220, 0.45);
+  background: linear-gradient(120deg, rgba(89, 65, 40, 0.28), rgba(243, 232, 220, 0.08));
 }
 
 .grid {
@@ -631,6 +658,84 @@ main {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.hobbies-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
+  width: 100%;
+}
+
+.hobby-card {
+  background: var(--card);
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  align-self: start;
+  width: 100%;
+}
+
+.hobby-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hobby-card h3 {
+  margin: 6px 0;
+  font-family: var(--font-heading);
+}
+
+.hobby-meta {
+  gap: 8px;
+}
+
+.hobby-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(243, 232, 220, 0.5);
+  background: linear-gradient(120deg, rgba(243, 232, 220, 0.12), rgba(89, 65, 40, 0.08));
+  text-decoration: none;
+  color: var(--text);
+  width: fit-content;
+  font-weight: 700;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.goodreads-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.imdb-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.hobby-link.imdb-link {
+  border-color: rgba(255, 206, 0, 0.7);
+  background: linear-gradient(120deg, rgba(255, 206, 0, 0.24), rgba(0, 0, 0, 0.3));
+}
+
+.hobby-link:hover,
+.hobby-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(243, 232, 220, 0.8);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+}
+
+.hobby-link.imdb-link:hover,
+.hobby-link.imdb-link:focus-visible {
+  border-color: rgba(255, 206, 0, 0.95);
+  background: linear-gradient(120deg, rgba(255, 206, 0, 0.3), rgba(0, 0, 0, 0.42));
 }
 
 .image-card {
