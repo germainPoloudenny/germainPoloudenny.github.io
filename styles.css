@@ -494,6 +494,10 @@ main {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .diploma-logo {
@@ -503,6 +507,7 @@ main {
   padding: 0;
   border: none;
   background: transparent;
+  box-shadow: none;
 }
 
 .experience-logos {
@@ -618,14 +623,17 @@ main {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 6px 12px;
-  background: rgba(0, 0, 0, 0.6);
+  padding: 0;
+  background: transparent;
   color: #fff;
-  border-radius: 999px;
+  border: none;
+  border-radius: 0;
   font-weight: 700;
   letter-spacing: 0.02em;
   font-size: 0.9rem;
   width: fit-content;
+  box-shadow: none;
+  transition: transform 0.16s ease, filter 0.16s ease;
 }
 
 .card.media .video-thumb-label img {
@@ -636,7 +644,8 @@ main {
 
 .card.media .video-thumb:hover .video-thumb-label,
 .card.media .video-thumb:focus-visible .video-thumb-label {
-  background: rgba(0, 0, 0, 0.8);
+  background: transparent;
+  filter: brightness(1.06);
 }
 
 .tag {
@@ -661,9 +670,10 @@ main {
 }
 
 .hobbies-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
   align-items: stretch;
-  width: 100%;
+  justify-content: start;
+  gap: 10px;
 }
 
 .hobby-card {
@@ -680,13 +690,17 @@ main {
 .hobby-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .hobby-card h3 {
-  margin: 6px 0;
+  margin: 0;
   font-family: var(--font-heading);
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .hobby-meta {
@@ -696,16 +710,18 @@ main {
 .hobby-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(243, 232, 220, 0.5);
-  background: linear-gradient(120deg, rgba(243, 232, 220, 0.12), rgba(89, 65, 40, 0.08));
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
   text-decoration: none;
   color: var(--text);
   width: fit-content;
+  margin-left: auto;
   font-weight: 700;
-  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+  box-shadow: none;
+  transition: transform 0.16s ease, color 0.16s ease;
 }
 
 .goodreads-logo {
@@ -721,21 +737,21 @@ main {
 }
 
 .hobby-link.imdb-link {
-  border-color: rgba(255, 206, 0, 0.7);
-  background: linear-gradient(120deg, rgba(255, 206, 0, 0.24), rgba(0, 0, 0, 0.3));
+  border: none;
+  background: transparent;
 }
 
 .hobby-link:hover,
 .hobby-link:focus-visible {
   transform: translateY(-2px);
-  border-color: rgba(243, 232, 220, 0.8);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+  color: var(--text);
+  box-shadow: none;
 }
 
 .hobby-link.imdb-link:hover,
 .hobby-link.imdb-link:focus-visible {
-  border-color: rgba(255, 206, 0, 0.95);
-  background: linear-gradient(120deg, rgba(255, 206, 0, 0.3), rgba(0, 0, 0, 0.42));
+  border: none;
+  background: transparent;
 }
 
 .image-card {
