@@ -4,17 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio – à compléter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="background-accent" aria-hidden="true"></div>
   <header class="site-header">
     <div class="brand">Germain Poloudenny</div>
-    <nav class="nav">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="nav" id="site-nav">
       <a href="#intro">Intro</a>
       <a href="#skills">Compétences</a>
-      <a href="#experiences">Expériences</a>
       <a href="#diplomas">Diplômes</a>
+      <a href="#experiences">Expériences</a>
       <a href="#articles">Articles</a>
       <a href="#projects">Projets</a>
       <a href="#contact">Contact</a>
@@ -37,16 +45,79 @@
       <div class="panel-header">
         <h2>Compétences</h2>
       </div>
-      <div class="card skill-card">
-        <div class="skill-tags" role="list">
-          <span class="skill-tag" role="listitem">
-            <span class="skill-name">Utilisation supercalculateur</span>
-            <span class="skill-detail">(Jean Zay – IDRIS)</span>
-          </span>
-          <span class="skill-tag" role="listitem">
-            <span class="skill-name">Git</span>
-          </span>
-        </div>
+      <div class="skill-tags" role="list">
+        <span class="skill-tag" role="listitem">
+          <span class="skill-name">Utilisation supercalculateur</span>
+          <span class="skill-detail">(Jean Zay – IDRIS)</span>
+        </span>
+        <span class="skill-tag" role="listitem">
+          <span class="skill-name">Git</span>
+        </span>
+      </div>
+    </section>
+
+    <section class="panel" id="diplomas">
+      <div class="panel-header">
+        <h2>Diplômes</h2>
+      </div>
+      <div class="timeline">
+        <article class="card experience-card diploma-card">
+          <div class="meta">
+            <span class="pill pill-date">Depuis 2024</span>
+            <span class="location">Laboratoire de Mathématiques de Lens</span>
+          </div>
+          <h3>Doctorat — Mathématiques</h3>
+          <div class="logo-row diploma-logos" aria-label="Institutions">
+            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
+            <img src="img/lml.png" alt="Laboratoire de Mathématiques de Lens" class="diploma-logo">
+            <img src="img/lrcs.png" alt="Laboratoire de Réactivité et Chimie des Solides" class="diploma-logo">
+          </div>
+        </article>
+
+        <article class="card experience-card diploma-card">
+          <div class="meta">
+            <span class="pill pill-date">2022 — 2024</span>
+            <span class="location">Faculté des Sciences Jean Perrin · Lens</span>
+          </div>
+          <h3>Master Informatique — Intelligence Artificielle</h3>
+          <div class="logo-row diploma-logos" aria-label="Université d'Artois">
+            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
+          </div>
+        </article>
+
+        <article class="card experience-card diploma-card">
+          <div class="meta">
+            <span class="pill pill-date">2021 — 2022</span>
+            <span class="location">Faculté des Sciences Jean Perrin · Lens</span>
+          </div>
+          <h3>Licence Informatique</h3>
+          <div class="logo-row diploma-logos" aria-label="Université d'Artois">
+            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
+          </div>
+        </article>
+
+        <article class="card experience-card diploma-card">
+          <div class="meta">
+            <span class="pill pill-date">2019 — 2021</span>
+            <span class="location">IUT de Lens · Lens</span>
+          </div>
+          <h3>DUT Informatique</h3>
+          <div class="logo-row diploma-logos" aria-label="IUT de Lens et Université d'Artois">
+            <img src="img/iut.png" alt="IUT de Lens" class="diploma-logo">
+            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
+          </div>
+        </article>
+
+        <article class="card experience-card diploma-card">
+          <div class="meta">
+            <span class="pill pill-date">2016 — 2019</span>
+            <span class="location">Lycée Colbert · Tourcoing</span>
+          </div>
+          <h3>Bac S — Sciences de l'Ingénieur</h3>
+          <div class="logo-row diploma-logos" aria-label="Lycée Colbert">
+            <img src="img/colbert.png" alt="Lycée Colbert" class="diploma-logo">
+          </div>
+        </article>
       </div>
     </section>
 
@@ -61,7 +132,7 @@
             <span class="location">Faculté des Sciences Jean Perrin · Lens</span>
           </div>
           <h3>Chargé de TD — Algèbre Linéaire</h3>
-          <div class="experience-logos">
+          <div class="logo-row experience-logos">
             <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
           </div>
         </article>
@@ -79,7 +150,7 @@
           </div>
           <h3>Affinage et intégration de grands modèles de langage</h3>
           <p class="exp-subtitle">IA · Deep Learning · Modèle de Conscience Projective (PCM)</p>
-          <div class="experience-logos">
+          <div class="logo-row experience-logos">
             <img src="img/paris-saclay.png" alt="Université Paris-Saclay" class="diploma-logo">
           </div>
         </article>
@@ -91,7 +162,7 @@
           </div>
           <h3>Implémentation d'un modèle d'agents</h3>
           <p class="exp-subtitle">IA · PCM · C# · Unity</p>
-          <div class="experience-logos">
+          <div class="logo-row experience-logos">
             <img src="img/paris-saclay.png" alt="Université Paris-Saclay" class="diploma-logo">
           </div>
         </article>
@@ -103,7 +174,7 @@
           </div>
           <h3>Développement d'outils et de fonctionnalités</h3>
           <p class="exp-subtitle">C# · Unity</p>
-          <div class="experience-logos">
+          <div class="logo-row experience-logos">
             <img src="img/52entertainment.png" alt="52 Entertainment" class="diploma-logo">
           </div>
         </article>
@@ -115,74 +186,9 @@
           </div>
           <h3>Acquisition et traitement de données</h3>
           <p class="exp-subtitle">IA · Python · Matlab</p>
-          <div class="experience-logos">
+          <div class="logo-row experience-logos">
             <img src="img/lml.png" alt="Laboratoire de Mathématiques de Lens" class="diploma-logo">
             <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel" id="diplomas">
-      <div class="panel-header">
-        <h2>Diplômes</h2>
-      </div>
-      <div class="timeline">
-        <article class="card experience-card diploma-card">
-          <div class="meta">
-            <span class="pill pill-date">Depuis 2024</span>
-            <span class="location">Laboratoire de Mathématiques de Lens</span>
-          </div>
-          <h3>Doctorat — Mathématiques</h3>
-          <div class="diploma-logos" aria-label="Institutions">
-            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
-            <img src="img/lml.png" alt="Laboratoire de Mathématiques de Lens" class="diploma-logo">
-            <img src="img/lrcs.png" alt="Laboratoire de Réactivité et Chimie des Solides" class="diploma-logo">
-          </div>
-        </article>
-
-        <article class="card experience-card diploma-card">
-          <div class="meta">
-            <span class="pill pill-date">2022 — 2024</span>
-            <span class="location">Faculté des Sciences Jean Perrin · Lens</span>
-          </div>
-          <h3>Master Informatique — Intelligence Artificielle</h3>
-          <div class="diploma-logos" aria-label="Université d'Artois">
-            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
-          </div>
-        </article>
-
-        <article class="card experience-card diploma-card">
-          <div class="meta">
-            <span class="pill pill-date">2021 — 2022</span>
-            <span class="location">Faculté des Sciences Jean Perrin · Lens</span>
-          </div>
-          <h3>Licence Informatique</h3>
-          <div class="diploma-logos" aria-label="Université d'Artois">
-            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
-          </div>
-        </article>
-
-        <article class="card experience-card diploma-card">
-          <div class="meta">
-            <span class="pill pill-date">2019 — 2021</span>
-            <span class="location">IUT de Lens · Lens</span>
-          </div>
-          <h3>DUT Informatique</h3>
-          <div class="diploma-logos" aria-label="IUT de Lens et Université d'Artois">
-            <img src="img/iut.png" alt="IUT de Lens" class="diploma-logo">
-            <img src="img/artois.png" alt="Université d'Artois" class="diploma-logo">
-          </div>
-        </article>
-
-        <article class="card experience-card diploma-card">
-          <div class="meta">
-            <span class="pill pill-date">2016 — 2019</span>
-            <span class="location">Lycée Colbert · Tourcoing</span>
-          </div>
-          <h3>Bac S — Sciences de l'Ingénieur</h3>
-          <div class="diploma-logos" aria-label="Lycée Colbert">
-            <img src="img/colbert.png" alt="Lycée Colbert" class="diploma-logo">
           </div>
         </article>
       </div>
@@ -213,7 +219,7 @@
       <div class="panel-header">
         <h2>Projets</h2>
       </div>
-      <div class="grid projects-grid">
+      <div class="grid projects-grid featured-projects">
         <figure class="card media">
           <h3>Roman</h3>
           <div class="tag-row">
@@ -228,7 +234,7 @@
             <span class="tag">Virtual Reality</span>
           </div>
           <a class="video-thumb" href="https://www.youtube.com/watch?v=V_FjvVCowEI" target="_blank" rel="noreferrer noopener" aria-label="Ouvrir la vidéo Artificial Consciousness sur YouTube">
-            <img src="https://img.youtube.com/vi/V_FjvVCowEI/hqdefault.jpg" alt="Miniature YouTube de la vidéo Artificial Consciousness">
+            <img class="media-frame media-cover" src="https://img.youtube.com/vi/V_FjvVCowEI/hqdefault.jpg" alt="Miniature YouTube de la vidéo Artificial Consciousness">
             <span class="video-thumb-label">
               <img src="img/youtube.png" alt="YouTube">
             </span>
@@ -245,7 +251,7 @@
             <span class="tag">Depuis 2025</span>
             <span class="tag">Jeu de rôle virtuel</span>
           </div>
-          <img src="img/witch.png" alt="Capture du jeu Witch">
+          <img class="media-frame media-cover" src="img/witch.png" alt="Capture du jeu Witch">
         </figure>
         <figure class="card media">
           <h3>Ecosim</h3>
@@ -254,7 +260,7 @@
             <span class="tag">Gestion</span>
             <span class="tag">Simulation</span>
           </div>
-          <video src="videos/ecosim.mp4" controls preload="metadata" aria-label="Vidéo du jeu Ecosim"></video>
+          <video class="media-frame" src="videos/ecosim.mp4" controls preload="metadata" aria-label="Vidéo du jeu Ecosim"></video>
         </figure>
         <figure class="card media">
           <h3>Error 404 Fire Fox Not Found</h3>
@@ -262,7 +268,7 @@
             <span class="tag">2022</span>
             <span class="tag">Narratif</span>
           </div>
-          <video src="videos/Error404FireFoxNotFound.mp4" controls preload="metadata" aria-label="Vidéo du jeu Error 404 Fire Fox Not Found"></video>
+          <video class="media-frame" src="videos/Error404FireFoxNotFound.mp4" controls preload="metadata" aria-label="Vidéo du jeu Error 404 Fire Fox Not Found"></video>
         </figure>
         <figure class="card media">
           <h3>Kill The Demons</h3>
@@ -270,7 +276,7 @@
             <span class="tag">2021</span>
             <span class="tag">RPG</span>
           </div>
-          <video src="videos/KillTheDemons.mp4" controls preload="metadata" aria-label="Vidéo du jeu Kill The Demons"></video>
+          <video class="media-frame" src="videos/KillTheDemons.mp4" controls preload="metadata" aria-label="Vidéo du jeu Kill The Demons"></video>
         </figure>
         <figure class="card media">
           <h3>Flatcraft</h3>
@@ -279,7 +285,7 @@
             <span class="tag">Sandbox</span>
             <span class="tag">Procédural</span>
           </div>
-          <img src="img/flatcraft.png" alt="Capture du jeu Flatcraft">
+          <img class="media-frame media-cover" src="img/flatcraft.png" alt="Capture du jeu Flatcraft">
         </figure>
         <figure class="card media">
           <h3>Turn The Clock</h3>
@@ -287,7 +293,7 @@
             <span class="tag">2019</span>
             <span class="tag">Platformer</span>
           </div>
-          <video src="videos/TurnTheClock.mp4" controls preload="metadata" aria-label="Vidéo du jeu Turn The Clock"></video>
+          <video class="media-frame" src="videos/TurnTheClock.mp4" controls preload="metadata" aria-label="Vidéo du jeu Turn The Clock"></video>
         </figure>
       </div>
     </section>
@@ -296,33 +302,149 @@
       <div class="panel-header">
         <h2>Contact</h2>
       </div>
-      <div class="contact-actions">
-        <a class="ghost" href="mailto:gpoloudenny@gmail.com">
-          <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75m19.5 0v.243a2.25 2.25 0 01-1.03 1.9l-7.5 4.615a2.25 2.25 0 01-2.37 0L3.28 8.893a2.25 2.25 0 01-1.03-1.9V6.75" />
-          </svg>
-          gpoloudenny@gmail.com
-        </a>
-        <a class="ghost" href="tel:+33761458317">
-          <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a2.25 2.25 0 002.25-2.25v-1.122a1.125 1.125 0 00-.852-1.09l-4.423-1.106a1.125 1.125 0 00-1.173.417l-.97 1.293a.75.75 0 01-1.21.038 12.035 12.035 0 01-2.507-3.705.75.75 0 01.334-.987l1.214-.607a1.125 1.125 0 00.58-.98V3a.75.75 0 00-.75-.75h-.375A2.25 2.25 0 005.25 4.5v2.25z" />
-          </svg>
-          07 61 45 83 17
-        </a>
-        <a class="ghost" href="https://github.com/germainPoloudenny" target="_blank" rel="noreferrer noopener">
-          <svg class="contact-icon fill" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-          </svg>
-          GitHub
-        </a>
-        <a class="ghost" href="https://www.linkedin.com/in/germain-poloudenny/" target="_blank" rel="noreferrer noopener">
-          <svg class="contact-icon fill" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M20 0H4a4 4 0 00-4 4v16a4 4 0 004 4h16a4 4 0 004-4V4a4 4 0 00-4-4zm-11.7 20H5V9h3.3v11zM6.7 7.5c-1 0-1.7-.7-1.7-1.6 0-.9.7-1.6 1.8-1.6s1.7.7 1.7 1.6-.7 1.6-1.8 1.6zm13.3 12.5h-3.3v-5.6c0-1.4-.5-2.3-1.7-2.3-1 0-1.6.7-1.8 1.4-.1.2-.1.5-.1.7v5.8H10V9h3.2v1.5c.4-.6 1.1-1.6 2.8-1.6 2 0 3.5 1.3 3.5 4.1V20z" />
-          </svg>
-          LinkedIn
-        </a>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <div class="contact-actions">
+            <div class="contact-chip">
+              <a class="contact-link" href="mailto:gpoloudenny@gmail.com">
+                <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75m19.5 0v.243a2.25 2.25 0 01-1.03 1.9l-7.5 4.615a2.25 2.25 0 01-2.37 0L3.28 8.893a2.25 2.25 0 01-1.03-1.9V6.75" />
+                </svg>
+                <span class="contact-text">gpoloudenny@gmail.com</span>
+              </a>
+              <button class="chip-copy" type="button" data-copy="gpoloudenny@gmail.com" aria-label="Copier l'email">
+                <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H5.25A2.25 2.25 0 003 10.5v8.25A2.25 2.25 0 005.25 21h8.25a2.25 2.25 0 002.25-2.25V15M9 8.25V5.25A2.25 2.25 0 0111.25 3h6a2.25 2.25 0 012.25 2.25v6A2.25 2.25 0 0117.25 13H14M9 8.25A2.25 2.25 0 0011.25 10.5H14" />
+                </svg>
+              </button>
+            </div>
+            <div class="contact-chip">
+              <a class="contact-link" href="tel:+33761458317">
+                <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a2.25 2.25 0 002.25-2.25v-1.122a1.125 1.125 0 00-.852-1.09l-4.423-1.106a1.125 1.125 0 00-1.173.417l-.97 1.293a.75.75 0 01-1.21.038 12.035 12.035 0 01-2.507-3.705.75.75 0 01.334-.987l1.214-.607a1.125 1.125 0 00.58-.98V3a.75.75 0 00-.75-.75h-.375A2.25 2.25 0 005.25 4.5v2.25z" />
+                </svg>
+                <span class="contact-text">07 61 45 83 17</span>
+              </a>
+              <button class="chip-copy" type="button" data-copy="+33761458317" aria-label="Copier le téléphone">
+                <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H5.25A2.25 2.25 0 003 10.5v8.25A2.25 2.25 0 005.25 21h8.25a2.25 2.25 0 002.25-2.25V15M9 8.25V5.25A2.25 2.25 0 0111.25 3h6a2.25 2.25 0 012.25 2.25v6A2.25 2.25 0 0117.25 13H14M9 8.25A2.25 2.25 0 0011.25 10.5H14" />
+                </svg>
+              </button>
+            </div>
+            <a class="ghost" href="https://github.com/germainPoloudenny" target="_blank" rel="noreferrer noopener">
+              <svg class="contact-icon fill" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+              GitHub
+            </a>
+            <a class="ghost" href="https://www.linkedin.com/in/germain-poloudenny/" target="_blank" rel="noreferrer noopener">
+              <svg class="contact-icon fill" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M20 0H4a4 4 0 00-4 4v16a4 4 0 004 4h16a4 4 0 004-4V4a4 4 0 00-4-4zm-11.7 20H5V9h3.3v11zM6.7 7.5c-1 0-1.7-.7-1.7-1.6 0-.9.7-1.6 1.8-1.6s1.7.7 1.7 1.6-.7 1.6-1.8 1.6zm13.3 12.5h-3.3v-5.6c0-1.4-.5-2.3-1.7-2.3-1 0-1.6.7-1.8 1.4-.1.2-.1.5-.1.7v5.8H10V9h3.2v1.5c.4-.6 1.1-1.6 2.8-1.6 2 0 3.5 1.3 3.5 4.1V20z" />
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('js');
+
+      const nav = document.querySelector('.nav');
+      const navToggle = document.querySelector('.nav-toggle');
+      const navLinks = Array.from(document.querySelectorAll('.nav a'));
+
+      const setActiveLink = (id) => {
+        if (!id) return;
+        navLinks.forEach((link) => {
+          const href = link.getAttribute('href');
+          const linkTarget = href && href.startsWith('#') ? href.slice(1) : null;
+          link.classList.toggle('active', linkTarget === id);
+        });
+      };
+
+      if (nav && navToggle) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('is-open');
+          navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+              setActiveLink(href.slice(1));
+            }
+            if (nav.classList.contains('is-open')) {
+              nav.classList.remove('is-open');
+              navToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+      const sections = navLinks
+        .map((link) => {
+          const targetId = link.getAttribute('href');
+          return targetId ? document.querySelector(targetId) : null;
+        })
+        .filter(Boolean);
+
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveLink(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.01, rootMargin: '-45% 0px -45% 0px' }
+      );
+
+      sections.forEach((section) => sectionObserver.observe(section));
+      setActiveLink(window.location.hash.replace('#', '') || sections[0]?.id);
+
+      const revealTargets = document.querySelectorAll('.hero, .panel, .card, .panel-header, .category-head');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18, rootMargin: '0px 0px -10% 0px' }
+      );
+
+      revealTargets.forEach((el, index) => {
+        el.classList.add('reveal');
+        el.style.setProperty('--reveal-delay', `${Math.min(index * 18, 120)}ms`);
+        observer.observe(el);
+      });
+
+      const copyButtons = document.querySelectorAll('[data-copy]');
+      copyButtons.forEach((button) => {
+        button.addEventListener('click', async () => {
+          const value = button.getAttribute('data-copy');
+          if (!value) return;
+
+          try {
+            await navigator.clipboard.writeText(value);
+            button.classList.add('is-copied');
+            setTimeout(() => {
+              button.classList.remove('is-copied');
+            }, 1600);
+          } catch (error) {
+            window.prompt('Copier le texte :', value);
+          }
+        });
+      });
+
+    });
+  </script>
 </body>
 </html>
