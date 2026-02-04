@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -21,7 +21,7 @@
     </button>
     <nav class="nav" id="site-nav">
       <a href="#intro">Intro</a>
-      <a href="#skills">Compétences</a>
+      <a href="#skills">Compétences complémentaires</a>
       <a href="#diplomas">Diplômes</a>
       <a href="#experiences">Expériences</a>
       <a href="#articles">Articles</a>
@@ -34,30 +34,49 @@
   <main>
     <section class="hero" id="intro">
       <div class="hero-text">
-        <h1>Doctorant</h1>
-      </div>
-      <div class="hero-placeholder">
-        <figure class="card image-card">
-          <img src="img/portrait.png" alt="Portrait de Germain Poloudenny" class="portrait">
-        </figure>
-      </div>
-    </section>
-
-    <section class="panel" id="skills">
-      <div class="panel-header">
-        <h2>Compétences</h2>
-      </div>
-      <div class="skill-tags" role="list">
-        <span class="skill-tag" role="listitem">
-          <span class="skill-name">Utilisation supercalculateur</span>
-          <span class="skill-detail">(Jean Zay – IDRIS)</span>
-        </span>
-        <span class="skill-tag" role="listitem">
-          <span class="skill-name">Git</span>
-        </span>
-        <span class="skill-tag" role="listitem">
-          <span class="skill-name">Permis B</span>
-        </span>
+        <h1>Doctorant IA</h1>
+        <div class="hero-content">
+          <figure class="card image-card portrait-card">
+            <img src="img/portrait.png" alt="Portrait de Germain Poloudenny" class="portrait">
+          </figure>
+          <div class="hero-skills" id="skills">
+            <h3>Compétences complémentaires</h3>
+            <ul class="skill-list">
+              <li>
+                Langues :
+                <span class="flag-icons" aria-hidden="true">
+                  <span class="flag-icon">
+                    <svg class="icon-flag" viewBox="0 0 3 2" focusable="false" aria-hidden="true">
+                      <rect width="1" height="2" x="0" y="0" fill="#0055a4"></rect>
+                      <rect width="1" height="2" x="1" y="0" fill="#ffffff"></rect>
+                      <rect width="1" height="2" x="2" y="0" fill="#ef4135"></rect>
+                    </svg>
+                  </span>
+                  <span class="flag-icon">
+                    <svg class="icon-flag" viewBox="0 0 60 30" focusable="false" aria-hidden="true">
+                      <rect width="60" height="30" fill="#012169"></rect>
+                      <path d="M0 0l60 30M60 0L0 30" stroke="#ffffff" stroke-width="6"></path>
+                      <path d="M0 0l60 30M60 0L0 30" stroke="#c8102e" stroke-width="3"></path>
+                      <rect x="24" y="0" width="12" height="30" fill="#ffffff"></rect>
+                      <rect x="0" y="12" width="60" height="6" fill="#ffffff"></rect>
+                      <rect x="26" y="0" width="8" height="30" fill="#c8102e"></rect>
+                      <rect x="0" y="13" width="60" height="4" fill="#c8102e"></rect>
+                    </svg>
+                  </span>
+                </span>
+                <span class="sr-only">Français, Anglais</span>
+              </li>
+              <li>Permis B</li>
+              <li class="skill-icon-only">
+                <!-- Git logo: Jason Long (CC BY 3.0), via Wikimedia Commons. -->
+                <span class="skill-label">Git</span>
+                <img class="icon icon-git" src="img/git.svg" alt="" aria-hidden="true">
+                <span class="sr-only">Git</span>
+              </li>
+              <li>Utilisation supercalculateur (Jean Zay – IDRIS)</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -226,13 +245,6 @@
       </div>
       <div class="grid projects-grid featured-projects">
         <figure class="card media">
-          <h3>Roman</h3>
-          <div class="tag-row">
-            <span class="tag">Depuis 2025</span>
-            <span class="tag">Fantasy</span>
-          </div>
-        </figure>
-        <figure class="card media">
           <h3>Artificial Consciousness</h3>
           <div class="tag-row">
             <span class="tag">2023</span>
@@ -310,6 +322,15 @@
       <div class="grid hobbies-grid">
         <article class="card hobby-card">
           <div class="hobby-header">
+            <h3>Œuvres audiovisuelles</h3>
+            <a class="hobby-link imdb-link" href="https://www.imdb.com/fr/user/ur204766750/ratings/?ref_=up_nv_rat" target="_blank" rel="noreferrer noopener">
+              <img class="imdb-logo" src="img/imdb.png" alt="IMDb">
+              <span class="sr-only">IMDb</span>
+            </a>
+          </div>
+        </article>
+        <article class="card hobby-card">
+          <div class="hobby-header">
             <h3>Lecture</h3>
             <a class="hobby-link" href="https://www.goodreads.com/user/show/166970247-germain" target="_blank" rel="noreferrer">
               <img class="goodreads-logo" src="img/goodreads.png" alt="Goodreads">
@@ -319,11 +340,7 @@
         </article>
         <article class="card hobby-card">
           <div class="hobby-header">
-            <h3>Œuvres audiovisuelles</h3>
-            <a class="hobby-link imdb-link" href="https://www.imdb.com/fr/user/ur204766750/ratings/?ref_=up_nv_rat" target="_blank" rel="noreferrer noopener">
-              <img class="imdb-logo" src="img/imdb.png" alt="IMDb">
-              <span class="sr-only">IMDb</span>
-            </a>
+            <h3>Écriture</h3>
           </div>
         </article>
       </div>
@@ -337,13 +354,13 @@
         <div class="contact-left">
           <div class="contact-actions">
             <div class="contact-chip">
-              <a class="contact-link" href="mailto:gpoloudenny@gmail.com">
+              <a class="contact-link" href="mailto:germain.poloudenny@gmail.com">
                 <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75m19.5 0v.243a2.25 2.25 0 01-1.03 1.9l-7.5 4.615a2.25 2.25 0 01-2.37 0L3.28 8.893a2.25 2.25 0 01-1.03-1.9V6.75" />
                 </svg>
-                <span class="contact-text">gpoloudenny@gmail.com</span>
+                <span class="contact-text">germain.poloudenny@gmail.com</span>
               </a>
-              <button class="chip-copy" type="button" data-copy="gpoloudenny@gmail.com" aria-label="Copier l'email">
+              <button class="chip-copy" type="button" data-copy="germain.poloudenny@gmail.com" aria-label="Copier l'email">
                 <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H5.25A2.25 2.25 0 003 10.5v8.25A2.25 2.25 0 005.25 21h8.25a2.25 2.25 0 002.25-2.25V15M9 8.25V5.25A2.25 2.25 0 0111.25 3h6a2.25 2.25 0 012.25 2.25v6A2.25 2.25 0 0117.25 13H14M9 8.25A2.25 2.25 0 0011.25 10.5H14" />
                 </svg>
@@ -490,3 +507,6 @@
   </script>
 </body>
 </html>
+
+
+
