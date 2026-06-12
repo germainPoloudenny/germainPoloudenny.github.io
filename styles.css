@@ -126,6 +126,11 @@ button:focus-visible {
   font-family: var(--font-heading);
 }
 
+.brand-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -807,6 +812,16 @@ main {
   padding: 12px 14px;
 }
 
+.hobby-card-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.hobby-card-link:hover,
+.hobby-card-link:focus-visible {
+  color: var(--text);
+}
+
 .hobby-header {
   display: flex;
   align-items: center;
@@ -845,7 +860,7 @@ main {
 }
 
 .goodreads-logo {
-  height: 22px;
+  height: 24px;
   width: auto;
   display: block;
 }
@@ -854,6 +869,42 @@ main {
   height: 22px;
   width: auto;
   display: block;
+}
+
+.writing-pdf-stack {
+  position: relative;
+  width: 36px;
+  height: 34px;
+  display: block;
+  flex: none;
+  transition: transform 0.16s ease;
+}
+
+.hobby-card-link:hover .writing-pdf-stack,
+.hobby-card-link:focus-visible .writing-pdf-stack {
+  transform: translateY(-2px);
+}
+
+.writing-pdf-stack img {
+  position: absolute;
+  width: 28px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.writing-pdf-stack img:nth-child(1) {
+  left: 0;
+  top: 2px;
+}
+
+.writing-pdf-stack img:nth-child(2) {
+  left: 4px;
+  top: 1px;
+}
+
+.writing-pdf-stack img:nth-child(3) {
+  left: 8px;
+  top: 0;
 }
 
 .hobby-link.imdb-link {
@@ -872,6 +923,132 @@ main {
 .hobby-link.imdb-link:focus-visible {
   border: none;
   background: transparent;
+}
+
+.writing-hero p,
+.empty-state {
+  margin: 0;
+  color: var(--muted);
+}
+
+.writings-list {
+  display: grid;
+  min-height: 160px;
+  place-items: center;
+  border: 1px dashed var(--border);
+  border-radius: calc(var(--radius) - 4px);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.writings-list.has-items {
+  min-height: 0;
+  place-items: stretch;
+  gap: clamp(12px, 2vw, 18px);
+  border: 0;
+  background: transparent;
+}
+
+.writing-card {
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  align-items: stretch;
+  align-content: stretch;
+  gap: clamp(14px, 2vw, 20px);
+}
+
+.writing-cover-link {
+  display: block;
+  align-self: stretch;
+  border-radius: calc(var(--radius) - 6px);
+}
+
+.writing-cover-link:hover,
+.writing-cover-link:focus-visible {
+  transform: translateY(-2px);
+}
+
+.writing-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - 6px);
+  border: 1px solid var(--border);
+  background: #ffffff;
+}
+
+.writing-content {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  align-content: stretch;
+  gap: 10px;
+  min-height: 0;
+  max-height: 593px;
+}
+
+.writing-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.writing-action {
+  border: 1px solid rgba(125, 226, 193, 0.5);
+  border-radius: 999px;
+  padding: 7px 14px;
+  background: rgba(125, 226, 193, 0.12);
+}
+
+.pdf-action {
+  width: 34px;
+  height: 34px;
+  justify-content: center;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.pdf-action:hover,
+.pdf-action:focus-visible {
+  text-decoration: none;
+  background: transparent;
+}
+
+.pdf-action-logo {
+  width: 34px;
+  height: 34px;
+  display: block;
+  object-fit: contain;
+}
+
+.writing-content h3,
+.writing-content p {
+  margin: 0;
+}
+
+.writing-content p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  max-width: 68ch;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-gutter: stable;
+  white-space: pre-line;
+}
+
+@media (max-width: 820px) {
+  .writing-card {
+    grid-template-columns: 1fr;
+  }
+
+  .writing-cover-link {
+    max-width: min(100%, 420px);
+    justify-self: center;
+  }
 }
 
 .image-card {
