@@ -1,3 +1,8 @@
+videos/*.mp4
+!videos/ecosim.mp4
+!videos/Error404FireFoxNotFound.mp4
+!videos/KillTheDemons.mp4
 videos/*.mkv
 videos/*.tmp.mp4
+videos/*.original.mp4
 tools/

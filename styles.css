@@ -438,23 +438,17 @@ main {
 }
 
 .projects-grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  justify-content: stretch;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 320px));
+  gap: 14px;
+  justify-content: start;
 }
 
 .projects-grid.featured-projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
 }
 
-.projects-grid.featured-projects .card.media:has(> video, > img, .video-thumb) {
-  flex: 0 1 auto;
-  width: fit-content;
-  max-width: 300px;
-  align-self: flex-start;
+.projects-grid > .card.media {
+  width: 100%;
 }
 
 .timeline {
@@ -544,6 +538,7 @@ main {
 
 .card.media {
   align-content: start;
+  justify-items: stretch;
   gap: 10px;
   overflow: hidden;
   min-height: 0;
@@ -554,7 +549,7 @@ main {
   font-family: var(--font-heading);
 }
 
-.card.media:not(:has(> video, > img, .video-thumb)) {
+.card.media:not(:has(> video, > img, > iframe, .video-thumb, .youtube-poster)) {
   padding-bottom: 12px;
   min-height: 0;
   gap: 8px;
@@ -733,6 +728,51 @@ main {
   object-fit: cover;
 }
 
+.youtube-poster {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+}
+
+.youtube-poster-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.youtube-poster-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.youtube-poster-play img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.youtube-poster:hover .youtube-poster-image,
+.youtube-poster:focus-visible .youtube-poster-image {
+  filter: brightness(1.08);
+  transform: scale(1.02);
+}
+
+.youtube-poster:hover .youtube-poster-play,
+.youtube-poster:focus-visible .youtube-poster-play {
+  filter: brightness(1.08);
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
 .card.media .video-thumb {
   display: grid;
   gap: 8px;
@@ -859,6 +899,13 @@ main {
   transition: transform 0.16s ease, color 0.16s ease;
 }
 
+.hobby-card-link:hover .hobby-link,
+.hobby-card-link:focus-visible .hobby-link,
+.hobby-card-link:hover .writing-pdf-stack,
+.hobby-card-link:focus-visible .writing-pdf-stack {
+  transform: translateY(-2px);
+}
+
 .goodreads-logo {
   height: 24px;
   width: auto;
@@ -878,11 +925,6 @@ main {
   display: block;
   flex: none;
   transition: transform 0.16s ease;
-}
-
-.hobby-card-link:hover .writing-pdf-stack,
-.hobby-card-link:focus-visible .writing-pdf-stack {
-  transform: translateY(-2px);
 }
 
 .writing-pdf-stack img {

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Germain Poloudenny</title>
   <link rel="icon" type="image/svg+xml" href="img/favicon-gp.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,12 +68,6 @@
                 <span class="sr-only">Français, Anglais</span>
               </li>
               <li>Permis B</li>
-              <li class="skill-icon-only">
-                <!-- Git logo: Jason Long (CC BY 3.0), via Wikimedia Commons. -->
-                <span class="skill-label">Git</span>
-                <img class="icon icon-git" src="img/git.svg" alt="" aria-hidden="true">
-                <span class="sr-only">Git</span>
-              </li>
             </ul>
           </div>
         </div>
@@ -249,12 +244,12 @@
             <span class="tag">2023</span>
             <span class="tag">Virtual Reality</span>
           </div>
-          <a class="video-thumb" href="https://www.youtube.com/watch?v=V_FjvVCowEI" target="_blank" rel="noreferrer noopener" aria-label="Ouvrir la vidéo Artificial Consciousness sur YouTube">
-            <img class="media-frame media-cover" src="https://img.youtube.com/vi/V_FjvVCowEI/hqdefault.jpg" alt="Miniature YouTube de la vidéo Artificial Consciousness">
-            <span class="video-thumb-label">
-              <img src="img/youtube.png" alt="YouTube">
+          <button class="media-frame youtube-poster" type="button" data-youtube-id="V_FjvVCowEI" data-youtube-title="Vidéo Artificial Consciousness" aria-label="Lire la vidéo Artificial Consciousness">
+            <img class="youtube-poster-image" src="https://img.youtube.com/vi/V_FjvVCowEI/maxresdefault.jpg" alt="">
+            <span class="youtube-poster-play" aria-hidden="true">
+              <img src="img/youtube.png" alt="">
             </span>
-          </a>
+          </button>
         </figure>
       </div>
       <div class="category-head">
@@ -309,7 +304,12 @@
             <span class="tag">2019</span>
             <span class="tag">Platformer</span>
           </div>
-          <video class="media-frame" src="videos/TurnTheClock.mp4" controls preload="metadata" aria-label="Vidéo du jeu Turn The Clock"></video>
+          <button class="media-frame youtube-poster" type="button" data-youtube-id="SG7PVgzbT2U" data-youtube-title="Vidéo du jeu Turn The Clock" aria-label="Lire la vidéo Turn The Clock">
+            <img class="youtube-poster-image" src="https://img.youtube.com/vi/SG7PVgzbT2U/maxresdefault.jpg" alt="">
+            <span class="youtube-poster-play" aria-hidden="true">
+              <img src="img/youtube.png" alt="">
+            </span>
+          </button>
         </figure>
       </div>
     </section>
@@ -319,24 +319,24 @@
         <h2>Hobbies</h2>
       </div>
       <div class="grid hobbies-grid">
-        <article class="card hobby-card">
+        <a class="card hobby-card hobby-card-link" href="https://www.imdb.com/fr/user/ur204766750/ratings/?ref_=up_nv_rat" target="_blank" rel="noreferrer noopener">
           <div class="hobby-header">
             <h3>Œuvres audiovisuelles</h3>
-            <a class="hobby-link imdb-link" href="https://www.imdb.com/fr/user/ur204766750/ratings/?ref_=up_nv_rat" target="_blank" rel="noreferrer noopener">
+            <span class="hobby-link imdb-link">
               <img class="imdb-logo" src="img/imdb.png" alt="IMDb">
               <span class="sr-only">IMDb</span>
-            </a>
+            </span>
           </div>
-        </article>
-        <article class="card hobby-card">
+        </a>
+        <a class="card hobby-card hobby-card-link" href="https://www.goodreads.com/user/show/166970247-germain" target="_blank" rel="noreferrer noopener">
           <div class="hobby-header">
             <h3>Lecture</h3>
-            <a class="hobby-link" href="https://www.goodreads.com/user/show/166970247-germain" target="_blank" rel="noreferrer">
+            <span class="hobby-link">
               <img class="goodreads-logo" src="img/goodreads.png" alt="Goodreads">
               <span class="sr-only">Goodreads</span>
-            </a>
+            </span>
           </div>
-        </article>
+        </a>
         <a class="card hobby-card hobby-card-link" href="ecrits.html">
           <div class="hobby-header">
             <h3>Écriture</h3>
@@ -491,6 +491,25 @@
           } catch (error) {
             window.prompt('Copier le texte :', value);
           }
+        });
+      });
+
+      const youtubePosters = document.querySelectorAll('.youtube-poster');
+      youtubePosters.forEach((poster) => {
+        poster.addEventListener('click', () => {
+          const videoId = poster.getAttribute('data-youtube-id');
+          const title = poster.getAttribute('data-youtube-title') || 'Lecteur vidéo YouTube';
+          if (!videoId) return;
+
+          const iframe = document.createElement('iframe');
+          iframe.className = 'media-frame';
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&autoplay=1`;
+          iframe.title = title;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allowFullscreen = true;
+
+          poster.replaceWith(iframe);
         });
       });
 
