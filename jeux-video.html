@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Jeux vidéo - Germain Poloudenny</title>
   <link rel="icon" type="image/svg+xml" href="img/favicon-gp.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,67 +36,6 @@
     <section class="hero writing-hero">
       <div class="hero-text">
         <h1>Jeux vidéo</h1>
-        <p>Liste de mes projets vidéoludiques.</p>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="grid projects-grid">
-        <figure class="card media">
-          <h3>Witch</h3>
-          <div class="tag-row">
-            <span class="tag">Depuis 2025</span>
-            <span class="tag">Jeu de rôle virtuel</span>
-          </div>
-          <img class="media-frame media-cover" src="img/witch.png" alt="Capture du jeu Witch">
-        </figure>
-        <figure class="card media">
-          <h3>Ecosim</h3>
-          <div class="tag-row">
-            <span class="tag">2023</span>
-            <span class="tag">Gestion</span>
-            <span class="tag">Simulation</span>
-          </div>
-          <video class="media-frame" src="videos/ecosim.mp4" controls preload="metadata" aria-label="Vidéo du jeu Ecosim"></video>
-        </figure>
-        <figure class="card media">
-          <h3>Error 404 Fire Fox Not Found</h3>
-          <div class="tag-row">
-            <span class="tag">2022</span>
-            <span class="tag">Narratif</span>
-          </div>
-          <video class="media-frame" src="videos/Error404FireFoxNotFound.mp4" controls preload="metadata" aria-label="Vidéo du jeu Error 404 Fire Fox Not Found"></video>
-        </figure>
-        <figure class="card media">
-          <h3>Kill The Demons</h3>
-          <div class="tag-row">
-            <span class="tag">2021</span>
-            <span class="tag">RPG</span>
-          </div>
-          <video class="media-frame" src="videos/KillTheDemons.mp4" controls preload="metadata" aria-label="Vidéo du jeu Kill The Demons"></video>
-        </figure>
-        <figure class="card media">
-          <h3>Flatcraft</h3>
-          <div class="tag-row">
-            <span class="tag">2020</span>
-            <span class="tag">Sandbox</span>
-            <span class="tag">Procédural</span>
-          </div>
-          <img class="media-frame media-cover" src="img/flatcraft.png" alt="Capture du jeu Flatcraft">
-        </figure>
-        <figure class="card media">
-          <h3>Turn The Clock</h3>
-          <div class="tag-row">
-            <span class="tag">2019</span>
-            <span class="tag">Platformer</span>
-          </div>
-          <button class="media-frame youtube-poster" type="button" data-youtube-id="SG7PVgzbT2U" data-youtube-title="Vidéo du jeu Turn The Clock" aria-label="Lire la vidéo Turn The Clock">
-            <img class="youtube-poster-image" src="https://img.youtube.com/vi/SG7PVgzbT2U/maxresdefault.jpg" alt="">
-            <span class="youtube-poster-play" aria-hidden="true">
-              <img src="img/youtube.png" alt="">
-            </span>
-          </button>
-        </figure>
       </div>
     </section>
   </main>
@@ -116,7 +54,7 @@
         });
       }
 
-      const revealTargets = document.querySelectorAll('.hero, .panel, .panel-header, .card');
+      const revealTargets = document.querySelectorAll('.hero');
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -133,25 +71,6 @@
         el.classList.add('reveal');
         el.style.setProperty('--reveal-delay', `${Math.min(index * 18, 120)}ms`);
         observer.observe(el);
-      });
-
-      const youtubePosters = document.querySelectorAll('.youtube-poster');
-      youtubePosters.forEach((poster) => {
-        poster.addEventListener('click', () => {
-          const videoId = poster.getAttribute('data-youtube-id');
-          const title = poster.getAttribute('data-youtube-title') || 'Lecteur vidéo YouTube';
-          if (!videoId) return;
-
-          const iframe = document.createElement('iframe');
-          iframe.className = 'media-frame';
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&autoplay=1`;
-          iframe.title = title;
-          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
-          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-          iframe.allowFullscreen = true;
-
-          poster.replaceWith(iframe);
-        });
       });
     });
   </script>
