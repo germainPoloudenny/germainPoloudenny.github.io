@@ -38,6 +38,27 @@
         <h1>Jeux vidéo</h1>
       </div>
     </section>
+
+    <section class="panel games-panel">
+      <div class="game-list">
+        <article class="card game-account-card">
+          <img class="game-logo" src="img/league-of-legends.png" alt="League of Legends">
+          <div class="game-content">
+            <div class="game-account-row">
+              <span class="game-id">Ayzikin <span class="game-tag">#EUW</span></span>
+              <button class="chip-copy" type="button" data-copy="Ayzikin#EUW" aria-label="Copier l'identifiant League of Legends">
+                <svg class="contact-icon stroke" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H5.25A2.25 2.25 0 003 10.5v8.25A2.25 2.25 0 005.25 21h8.25a2.25 2.25 0 002.25-2.25V15M9 8.25V5.25A2.25 2.25 0 0111.25 3h6a2.25 2.25 0 012.25 2.25v6A2.25 2.25 0 0117.25 13H14M9 8.25A2.25 2.25 0 0011.25 10.5H14" />
+                </svg>
+              </button>
+            </div>
+            <a class="game-profile-link" href="https://op.gg/lol/summoners/euw/Ayzikin-EUW" target="_blank" rel="noreferrer noopener" aria-label="Voir le profil OP.GG">
+              <img class="opgg-logo" src="img/opgg.png" alt="OP.GG">
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -54,7 +75,7 @@
         });
       }
 
-      const revealTargets = document.querySelectorAll('.hero');
+      const revealTargets = document.querySelectorAll('.hero, .panel, .card');
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -71,6 +92,55 @@
         el.classList.add('reveal');
         el.style.setProperty('--reveal-delay', `${Math.min(index * 18, 120)}ms`);
         observer.observe(el);
+      });
+
+      const copyToClipboard = async (value) => {
+        if (window.navigator?.clipboard && window.isSecureContext) {
+          await window.navigator.clipboard.writeText(value);
+          return true;
+        }
+
+        if (typeof document.execCommand !== 'function') {
+          return false;
+        }
+
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          return document.execCommand('copy');
+        } finally {
+          textarea.remove();
+        }
+      };
+
+      const copyButtons = document.querySelectorAll('[data-copy]');
+      copyButtons.forEach((button) => {
+        button.addEventListener('click', async () => {
+          const value = button.getAttribute('data-copy');
+          if (!value) return;
+
+          let copied = false;
+          try {
+            copied = await copyToClipboard(value);
+          } catch (error) {
+            copied = false;
+          }
+
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.classList.remove('is-copied');
+          }, 1600);
+
+          if (!copied) {
+            window.prompt('Copier le texte :', value);
+          }
+        });
       });
     });
   </script>

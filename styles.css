@@ -955,6 +955,80 @@ main {
   top: 0;
 }
 
+.games-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 380px));
+  gap: 14px;
+  align-items: start;
+}
+
+.game-account-card {
+  align-content: start;
+  justify-items: stretch;
+  gap: 16px;
+}
+
+.game-logo {
+  width: min(100%, 300px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.game-content {
+  display: grid;
+  gap: 12px;
+}
+
+.game-account-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.game-id {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.game-tag {
+  color: var(--muted);
+}
+
+.game-profile-link {
+  display: inline-flex;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.opgg-logo {
+  width: 32px;
+  height: 32px;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.16s ease;
+}
+
+.game-profile-link:hover .opgg-logo,
+.game-profile-link:focus-visible .opgg-logo {
+  transform: translateY(-2px) scale(1.04);
+}
+
 .hobby-link.imdb-link {
   border: none;
   background: transparent;
