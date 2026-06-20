@@ -51,29 +51,28 @@
 
   </main>
 
+  <script src="data/les-esclaves-astre-noir.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('js');
 
       const nav = document.querySelector('.nav');
       const navToggle = document.querySelector('.nav-toggle');
+      const writingData = window.portfolioWritingData || {};
+      const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      })[character]);
       const writings = [
         {
           cover: 'img/les-esclaves-astre-noir.png',
           title: "Les Esclaves - Tome 1 : L'Astre Noir",
           genre: 'Fantasy sombre',
           pdf: 'pdf/les-esclaves-t1-astre-noir.pdf',
-          backCover: `Jordas a consacré sa vie à traquer des pierres défiant la raison. Devenu conteur après l'échec de ses recherches, il recueille une histoire dont il se garde bien de révéler l'origine.
-
-C'est l'histoire de Liam, un enfant solitaire né dans un royaume où les artistes rejouent, génération après génération, une guerre ancienne.
-
-Méprisé par les siens, rejeté par l'Académie, Liam voit son existence basculer lors de sa rencontre avec Kvöt, un vieil étranger lié à une mystérieuse pierre. À ses côtés, il découvre un pouvoir fascinant : une échappatoire, peut-être même une chance d'exister enfin.
-
-Mais les rivalités d'académies, les disparitions et les légendes du Velmor forment seulement les premiers signes d'une menace plus vaste.
-
-Jordas croyait avoir trouvé la preuve attendue depuis toujours. Il comprendra peut-être trop tard : certaines découvertes ne révèlent pas le passé.
-
-Elles avertissent de l'avenir.`
+          backCover: writingData.backCover || ''
         }
       ];
       const writingsList = document.querySelector('#writings-list');
@@ -102,7 +101,7 @@ Elles avertissent de l'avenir.`
                   <img class="pdf-action-logo" src="img/pdf-document.png" alt="" aria-hidden="true">
                 </a>
               </div>
-              <p>${writing.backCover}</p>
+              <p>${escapeHtml(writing.backCover)}</p>
             </div>
           </article>
         `).join('');
