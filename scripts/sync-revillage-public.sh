@@ -9,6 +9,7 @@ if [ -z "$revillage_root" ]; then
 fi
 
 source_root="$revillage_root/web"
+title_source="$source_root/montage/img/titre.png"
 
 if [ ! -d "$revillage_root/.git" ]; then
   echo "ReVillage repository not found at $revillage_root." >&2
@@ -18,6 +19,10 @@ fi
 if [ ! -d "$source_root" ]; then
   echo "ReVillage public source folder not found at $source_root." >&2
   exit 1
+fi
+
+if [ -f "$revillage_root/montage/img/titre.png" ]; then
+  title_source="$revillage_root/montage/img/titre.png"
 fi
 
 remote_git() {
@@ -84,7 +89,7 @@ copy_required "$source_root/index.html" "$worktree_root/index.html"
 copy_required "$source_root/css/accueil.css" "$worktree_root/css/accueil.css"
 copy_required "$source_root/img/ReVillage_logo.png" "$worktree_root/img/ReVillage_logo.png"
 copy_required "$source_root/img/ReVillage_logo.webp" "$worktree_root/img/ReVillage_logo.webp"
-copy_required "$source_root/montage/img/titre.png" "$worktree_root/montage/img/titre.png"
+copy_required "$title_source" "$worktree_root/montage/img/titre.png"
 copy_required "$source_root/montage/img/logo-loup-garou-thiercelieux.png" "$worktree_root/montage/img/logo-loup-garou-thiercelieux.png"
 copy_required "$source_root/montage/img/Le_sanglot_des_cigales_Logo.png" "$worktree_root/montage/img/Le_sanglot_des_cigales_Logo.png"
 copy_required "$source_root/montage/img/site-background.png" "$worktree_root/montage/img/site-background.png"

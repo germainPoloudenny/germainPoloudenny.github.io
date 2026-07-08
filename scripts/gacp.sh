@@ -4,6 +4,7 @@ set -eu
 repo_root="$(git rev-parse --show-toplevel)"
 projects_root="$(dirname "$repo_root")"
 sync_script="$repo_root/scripts/sync-roman-pdf.ps1"
+revillage_portfolio_sync_script="$repo_root/scripts/sync-revillage-portfolio-assets.sh"
 revillage_sync_script="$repo_root/scripts/sync-revillage-public.sh"
 revillage_root="$projects_root/ReVillage"
 
@@ -43,6 +44,8 @@ remote_repo_path() {
 }
 
 run_powershell
+
+sh "$revillage_portfolio_sync_script" "$revillage_root"
 
 git add -A
 
