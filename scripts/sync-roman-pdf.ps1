@@ -21,6 +21,22 @@ $coverDestination = Join-Path $repoRoot ($coverDestinationRelative -replace '/',
 $writingsPage = Join-Path $repoRoot $writingsPageRelative
 $destinationRelatives = @($pdfDestinationRelative, $backCoverDestinationRelative, $coverDestinationRelative, $writingsPageRelative)
 
+function Resolve-GitCommand {
+  foreach ($candidate in @('git', 'git.exe')) {
+    try {
+      & $candidate --version *> $null
+      if ($LASTEXITCODE -eq 0) {
+        return $candidate
+      }
+    }
+    catch {
+    }
+  }
+
+  [Console]::Error.WriteLine('Git executable not found from PowerShell.')
+  exit 1
+}
+
 foreach ($source in @($pdfSource, $backCoverSource, $coverSource)) {
   if (-not (Test-Path -LiteralPath $source)) {
     [Console]::Error.WriteLine("Writing source not found: $source")
@@ -68,7 +84,8 @@ Write-Host "Updated cache version in $writingsPageRelative"
 if ($CheckGitStatus) {
   Push-Location $repoRoot
   try {
-    $status = git status --porcelain -- $destinationRelatives
+    $gitCommand = Resolve-GitCommand
+    $status = & $gitCommand status --porcelain -- $destinationRelatives
     if ($LASTEXITCODE -ne 0) {
       exit $LASTEXITCODE
     }
@@ -81,7 +98,7 @@ if ($CheckGitStatus) {
         [Console]::Error.WriteLine("  $destinationRelative")
       }
       [Console]::Error.WriteLine("")
-      git status --short -- $destinationRelatives
+      & $gitCommand status --short -- $destinationRelatives
       exit 1
     }
   }
