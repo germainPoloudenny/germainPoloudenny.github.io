@@ -26,6 +26,7 @@ destination_relatives="
 pdf/les-esclaves-t1-astre-noir.pdf
 data/les-esclaves-astre-noir.js
 img/les-esclaves-astre-noir.png
+img/revillage-tome1.png
 ecrits.html
 "
 

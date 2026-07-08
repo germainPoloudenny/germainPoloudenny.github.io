@@ -11,15 +11,18 @@ $writingRoot = Join-Path $projectsRoot "Ecrire\ouvrages\Les Esclaves\L'Astre Noi
 $pdfSource = Join-Path $writingRoot 'exports\roman.pdf'
 $backCoverSource = Join-Path $writingRoot 'text\input\4eme_de_couverture.txt'
 $coverSource = Join-Path $writingRoot 'img\couverture.png'
+$revillageCoverSource = Join-Path $projectsRoot "Ecrire\ouvrages\ReVillage\roman\Tome1\img\couverture.png"
 $pdfDestinationRelative = 'pdf/les-esclaves-t1-astre-noir.pdf'
 $backCoverDestinationRelative = 'data/les-esclaves-astre-noir.js'
 $coverDestinationRelative = 'img/les-esclaves-astre-noir.png'
+$revillageCoverDestinationRelative = 'img/revillage-tome1.png'
 $writingsPageRelative = 'ecrits.html'
 $pdfDestination = Join-Path $repoRoot ($pdfDestinationRelative -replace '/', [IO.Path]::DirectorySeparatorChar)
 $backCoverDestination = Join-Path $repoRoot ($backCoverDestinationRelative -replace '/', [IO.Path]::DirectorySeparatorChar)
 $coverDestination = Join-Path $repoRoot ($coverDestinationRelative -replace '/', [IO.Path]::DirectorySeparatorChar)
+$revillageCoverDestination = Join-Path $repoRoot ($revillageCoverDestinationRelative -replace '/', [IO.Path]::DirectorySeparatorChar)
 $writingsPage = Join-Path $repoRoot $writingsPageRelative
-$destinationRelatives = @($pdfDestinationRelative, $backCoverDestinationRelative, $coverDestinationRelative, $writingsPageRelative)
+$destinationRelatives = @($pdfDestinationRelative, $backCoverDestinationRelative, $coverDestinationRelative, $revillageCoverDestinationRelative, $writingsPageRelative)
 
 function Resolve-GitCommand {
   $programFilesX86 = [Environment]::GetFolderPath('ProgramFilesX86')
@@ -56,7 +59,7 @@ function Resolve-GitCommand {
   exit 1
 }
 
-foreach ($source in @($pdfSource, $backCoverSource, $coverSource)) {
+foreach ($source in @($pdfSource, $backCoverSource, $coverSource, $revillageCoverSource)) {
   if (-not (Test-Path -LiteralPath $source)) {
     [Console]::Error.WriteLine("Writing source not found: $source")
     exit 1
@@ -68,6 +71,9 @@ Copy-Item -LiteralPath $pdfSource -Destination $pdfDestination -Force
 
 New-Item -ItemType Directory -Path (Split-Path -Path $coverDestination -Parent) -Force | Out-Null
 Copy-Item -LiteralPath $coverSource -Destination $coverDestination -Force
+
+New-Item -ItemType Directory -Path (Split-Path -Path $revillageCoverDestination -Parent) -Force | Out-Null
+Copy-Item -LiteralPath $revillageCoverSource -Destination $revillageCoverDestination -Force
 
 $backCover = (Get-Content -LiteralPath $backCoverSource -Raw -Encoding UTF8).Trim()
 $coverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $coverSource).Hash.Substring(0, 12).ToLowerInvariant()
@@ -98,6 +104,7 @@ if ($updatedWritingsPageContent -cne $writingsPageContent) {
 Write-Host "Synced $pdfDestinationRelative from roman.pdf"
 Write-Host "Synced $backCoverDestinationRelative from 4eme_de_couverture.txt"
 Write-Host "Synced $coverDestinationRelative from couverture.png"
+Write-Host "Synced $revillageCoverDestinationRelative from ReVillage Tome1 couverture.png"
 Write-Host "Updated cache version in $writingsPageRelative"
 
 if ($CheckGitStatus) {

@@ -66,6 +66,10 @@
           genre: 'Fantasy sombre',
           pdf: 'pdf/les-esclaves-t1-astre-noir.pdf',
           backCover: writingData.backCover || ''
+        },
+        {
+          cover: 'img/revillage-tome1.png',
+          title: 'Re:Village - Tome 1'
         }
       ];
       const writingsList = document.querySelector('#writings-list');
@@ -79,25 +83,37 @@
 
       if (writingsList && writings.length > 0) {
         writingsList.classList.add('has-items');
-        writingsList.innerHTML = writings.map((writing) => `
-          <article class="card writing-card">
-            <a class="writing-cover-link" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Lire ${writing.title}">
-              <img class="writing-cover" src="${writing.cover}" alt="Page de couverture de ${writing.title}">
-            </a>
-            <div class="writing-content">
-              <div class="meta">
-                <span class="pill">${writing.genre}</span>
-              </div>
-              <h3>${writing.title}</h3>
-              <div class="writing-actions">
+        writingsList.innerHTML = writings.map((writing) => {
+          const cover = `<img class="writing-cover" src="${writing.cover}" alt="Page de couverture de ${writing.title}">`;
+          const coverBlock = writing.pdf
+            ? `<a class="writing-cover-link" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Lire ${writing.title}">${cover}</a>`
+            : `<div class="writing-cover-link">${cover}</div>`;
+          const meta = writing.genre
+            ? `<div class="meta"><span class="pill">${writing.genre}</span></div>`
+            : '';
+          const actions = writing.pdf
+            ? `<div class="writing-actions">
                 <a class="paper-link writing-action pdf-action" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Ouvrir le PDF de ${writing.title}">
                   <img class="pdf-action-logo" src="img/pdf-document.png" alt="" aria-hidden="true">
                 </a>
+              </div>`
+            : '';
+          const backCover = writing.backCover
+            ? `<p>${escapeHtml(writing.backCover)}</p>`
+            : '';
+
+          return `
+            <article class="card writing-card">
+              ${coverBlock}
+              <div class="writing-content">
+                ${meta}
+                <h3>${writing.title}</h3>
+                ${actions}
+                ${backCover}
               </div>
-              <p>${escapeHtml(writing.backCover)}</p>
-            </div>
-          </article>
-        `).join('');
+            </article>
+          `;
+        }).join('');
       }
 
       const revealTargets = document.querySelectorAll('.hero, .panel, .panel-header');
