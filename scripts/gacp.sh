@@ -32,6 +32,15 @@ remote_git() {
   fi
 }
 
+remote_repo_path() {
+  repo_path="$1"
+  if command -v git.exe >/dev/null 2>&1 && command -v wslpath >/dev/null 2>&1; then
+    wslpath -w "$repo_path"
+  else
+    printf '%s\n' "$repo_path"
+  fi
+}
+
 run_powershell
 
 git add -A
@@ -46,7 +55,7 @@ current_branch="$(git branch --show-current)"
 remote_git push origin "$current_branch"
 
 if [ -d "$revillage_root/.git" ]; then
-  remote_git -C "$revillage_root" push origin public-visible
+  remote_git -C "$(remote_repo_path "$revillage_root")" push origin public-visible
 else
   echo "ReVillage repository not found at $revillage_root; skipped public-visible push." >&2
 fi
