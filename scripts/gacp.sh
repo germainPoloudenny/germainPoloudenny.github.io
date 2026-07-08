@@ -4,6 +4,7 @@ set -eu
 repo_root="$(git rev-parse --show-toplevel)"
 projects_root="$(dirname "$repo_root")"
 sync_script="$repo_root/scripts/sync-roman-pdf.ps1"
+revillage_sync_script="$repo_root/scripts/sync-revillage-public.sh"
 revillage_root="$projects_root/ReVillage"
 
 commit_message="${*:-update}"
@@ -55,7 +56,7 @@ current_branch="$(git branch --show-current)"
 remote_git push origin "$current_branch"
 
 if [ -d "$revillage_root/.git" ]; then
-  remote_git -C "$(remote_repo_path "$revillage_root")" push origin public-visible
+  "$revillage_sync_script" "$revillage_root"
 else
   echo "ReVillage repository not found at $revillage_root; skipped public-visible push." >&2
 fi
