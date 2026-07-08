@@ -77,7 +77,7 @@ fi
 
 git -C "$revillage_root" worktree add "$worktree_root" public-visible >/dev/null
 
-git -C "$worktree_root" ls-files -z | xargs -0 -r rm -f --
+(cd "$worktree_root" && git ls-files -z | xargs -0 -r rm -f --)
 find "$worktree_root" -mindepth 1 -type d -empty -delete
 
 copy_required "$source_root/index.html" "$worktree_root/index.html"

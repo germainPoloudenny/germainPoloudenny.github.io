@@ -56,7 +56,7 @@ current_branch="$(git branch --show-current)"
 remote_git push origin "$current_branch"
 
 if [ -d "$revillage_root/.git" ]; then
-  "$revillage_sync_script" "$revillage_root"
+  sh "$revillage_sync_script" "$revillage_root"
 else
   echo "ReVillage repository not found at $revillage_root; skipped public-visible push." >&2
 fi
