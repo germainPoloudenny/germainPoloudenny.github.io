@@ -102,8 +102,10 @@
             ? `<p>${escapeHtml(writing.backCover)}</p>`
             : '';
 
+          const isPreviewOnly = !writing.pdf && !writing.genre && !writing.backCover;
+
           return `
-            <article class="card writing-card">
+            <article class="card writing-card${isPreviewOnly ? ' writing-card-preview' : ''}">
               ${coverBlock}
               <div class="writing-content">
                 ${meta}

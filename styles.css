@@ -1108,6 +1108,18 @@ main {
   background: #ffffff;
 }
 
+.writing-card-preview {
+  grid-template-columns: minmax(220px, 320px);
+  justify-content: start;
+  align-items: start;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.writing-card-preview .writing-cover-link {
+  align-self: start;
+}
+
 .writing-content {
   display: grid;
   grid-template-rows: auto auto auto minmax(0, 1fr);
@@ -1115,6 +1127,11 @@ main {
   gap: 10px;
   min-height: 0;
   max-height: 593px;
+}
+
+.writing-card-preview .writing-content {
+  grid-template-rows: auto;
+  max-height: none;
 }
 
 .writing-actions {
