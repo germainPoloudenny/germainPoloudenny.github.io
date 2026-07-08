@@ -780,6 +780,16 @@ main {
   width: 100%;
 }
 
+.project-card-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.project-card-link:hover,
+.project-card-link:focus-visible {
+  color: var(--text);
+}
+
 .card.media .video-thumb-label {
   display: inline-flex;
   align-items: center;
