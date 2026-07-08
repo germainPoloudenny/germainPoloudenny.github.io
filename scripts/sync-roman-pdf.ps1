@@ -22,7 +22,26 @@ $writingsPage = Join-Path $repoRoot $writingsPageRelative
 $destinationRelatives = @($pdfDestinationRelative, $backCoverDestinationRelative, $coverDestinationRelative, $writingsPageRelative)
 
 function Resolve-GitCommand {
-  foreach ($candidate in @('git', 'git.exe')) {
+  $programFilesX86 = [Environment]::GetFolderPath('ProgramFilesX86')
+  $candidates = @(
+    'git',
+    'git.exe',
+    (Join-Path $env:ProgramFiles 'Git\cmd\git.exe'),
+    (Join-Path $env:ProgramFiles 'Git\bin\git.exe')
+  )
+
+  if ($programFilesX86) {
+    $candidates += @(
+      (Join-Path $programFilesX86 'Git\cmd\git.exe'),
+      (Join-Path $programFilesX86 'Git\bin\git.exe')
+    )
+  }
+
+  foreach ($candidate in $candidates) {
+    if (-not $candidate) {
+      continue
+    }
+
     try {
       & $candidate --version *> $null
       if ($LASTEXITCODE -eq 0) {
