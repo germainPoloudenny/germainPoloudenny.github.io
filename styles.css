@@ -549,7 +549,7 @@ main {
   font-family: var(--font-heading);
 }
 
-.card.media:not(:has(> video, > img, > iframe, .video-thumb, .youtube-poster)) {
+.card.media:not(:has(> video, > img, > iframe, .video-thumb, .youtube-poster, .media-cover-link)) {
   padding-bottom: 12px;
   min-height: 0;
   gap: 8px;
@@ -728,6 +728,21 @@ main {
   object-fit: cover;
 }
 
+.media-cover-link {
+  overflow: hidden;
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.media-cover-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
 .youtube-poster {
   position: relative;
   overflow: hidden;
@@ -788,6 +803,12 @@ main {
 .project-card-link:hover,
 .project-card-link:focus-visible {
   color: var(--text);
+}
+
+.project-card-link:hover .media-cover-image,
+.project-card-link:focus-visible .media-cover-image {
+  filter: brightness(1.08);
+  transform: scale(1.02);
 }
 
 .card.media .video-thumb-label {
