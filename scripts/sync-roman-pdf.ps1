@@ -78,6 +78,7 @@ Copy-Item -LiteralPath $revillageCoverSource -Destination $revillageCoverDestina
 $backCover = (Get-Content -LiteralPath $backCoverSource -Raw -Encoding UTF8).Trim()
 $coverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $coverSource).Hash.Substring(0, 12).ToLowerInvariant()
 $backCoverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $backCoverSource).Hash.Substring(0, 12).ToLowerInvariant()
+$revillageCoverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $revillageCoverSource).Hash.Substring(0, 12).ToLowerInvariant()
 $assetVersion = "$coverVersion$backCoverVersion"
 $writingData = [ordered]@{
   backCover = $backCover
@@ -97,6 +98,13 @@ if ($writingsPageContent -notmatch $writingDataPattern) {
 }
 $versionedWritingData = "data/les-esclaves-astre-noir.js?v=$assetVersion"
 $updatedWritingsPageContent = [regex]::Replace($writingsPageContent, $writingDataPattern, $versionedWritingData)
+$revillageCoverPattern = 'img/revillage-tome1\.png(?:\?v=[a-f0-9]+)?'
+if ($updatedWritingsPageContent -notmatch $revillageCoverPattern) {
+  [Console]::Error.WriteLine("ReVillage cover reference not found in: $writingsPage")
+  exit 1
+}
+$versionedRevillageCover = "img/revillage-tome1.png?v=$revillageCoverVersion"
+$updatedWritingsPageContent = [regex]::Replace($updatedWritingsPageContent, $revillageCoverPattern, $versionedRevillageCover)
 if ($updatedWritingsPageContent -cne $writingsPageContent) {
   [IO.File]::WriteAllText($writingsPage, $updatedWritingsPageContent, [Text.UTF8Encoding]::new($false))
 }
