@@ -18,8 +18,9 @@ d'abord le socle parent, puis ces regles locales pour les fichiers de ce depot.
 
 - Utiliser `gacp` pour publier le portfolio quand l'utilisateur demande commit
   et push depuis ce depot.
-- `gacp` synchronise les assets publics necessaires depuis `Ecrire` et
-  `ReVillage` avant de commit/push le portfolio.
+- `gacp` lance d'abord le `gacp` du depot `ReVillage`, puis synchronise les
+  assets publics necessaires depuis `Ecrire` et `ReVillage` avant de commit/push
+  le portfolio.
 - Ne pas pousser le depot `Ecrire` depuis un travail sur `Portfolio`.
 - Ne pas publier le depot complet `ReVillage` depuis un travail sur `Portfolio`;
   seule la branche publique `public-visible` peut etre mise a jour par la

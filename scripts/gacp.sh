@@ -7,6 +7,7 @@ sync_script="$repo_root/scripts/sync-roman-pdf.ps1"
 revillage_portfolio_sync_script="$repo_root/scripts/sync-revillage-portfolio-assets.sh"
 revillage_sync_script="$repo_root/scripts/sync-revillage-public.sh"
 revillage_root="$projects_root/ReVillage"
+revillage_gacp_script="$revillage_root/gacp"
 
 commit_message="${*:-update}"
 
@@ -42,6 +43,17 @@ remote_repo_path() {
     printf '%s\n' "$repo_path"
   fi
 }
+
+if [ -d "$revillage_root/.git" ]; then
+  if [ ! -f "$revillage_gacp_script" ]; then
+    echo "ReVillage gacp script not found at $revillage_gacp_script." >&2
+    exit 1
+  fi
+
+  sh "$revillage_gacp_script" "$commit_message"
+else
+  echo "ReVillage repository not found at $revillage_root; skipped ReVillage branch push." >&2
+fi
 
 run_powershell
 
