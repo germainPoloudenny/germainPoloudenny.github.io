@@ -52,6 +52,7 @@
       const nav = document.querySelector('.nav');
       const navToggle = document.querySelector('.nav-toggle');
       const writingData = window.portfolioWritingData || {};
+      const writingGenres = writingData.genres || {};
       const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
         '&': '&amp;',
         '<': '&lt;',
@@ -63,13 +64,14 @@
         {
           cover: `img/les-esclaves-astre-noir.png?v=${writingData.assetVersion || '1'}`,
           title: "Les Esclaves - Tome 1 : L'Astre Noir",
-          genre: 'Fantasy sombre',
+          genre: writingGenres.lesEsclaves || 'Fantasy',
           pdf: 'pdf/les-esclaves-t1-astre-noir.pdf',
           backCover: writingData.backCover || ''
         },
         {
           cover: 'img/revillage-tome1.png?v=6f7271ac0bb6',
-          title: 'Re:Village - Tome 1'
+          title: 'Re:Village - Tome 1',
+          genre: writingGenres.revillage || 'Horreur'
         }
       ];
       const writingsList = document.querySelector('#writings-list');

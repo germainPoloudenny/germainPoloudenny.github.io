@@ -11,6 +11,8 @@ $writingRoot = Join-Path $projectsRoot "Ecrire\ouvrages\Les Esclaves\L'Astre Noi
 $pdfSource = Join-Path $writingRoot 'exports\roman.pdf'
 $backCoverSource = Join-Path $writingRoot 'text\input\4eme_de_couverture.txt'
 $coverSource = Join-Path $writingRoot 'img\couverture.png'
+$lesEsclavesMetadataSource = Join-Path $projectsRoot "Ecrire\ouvrages\Les Esclaves\metadata.yml"
+$revillageMetadataSource = Join-Path $projectsRoot "Ecrire\ouvrages\ReVillage\metadata.yml"
 $revillageCoverSource = Join-Path $projectsRoot "Ecrire\ouvrages\ReVillage\roman\Tome1\img\couverture.png"
 $pdfDestinationRelative = 'pdf/les-esclaves-t1-astre-noir.pdf'
 $backCoverDestinationRelative = 'data/les-esclaves-astre-noir.js'
@@ -59,7 +61,33 @@ function Resolve-GitCommand {
   exit 1
 }
 
-foreach ($source in @($pdfSource, $backCoverSource, $coverSource, $revillageCoverSource)) {
+function Read-FirstGenre {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$MetadataPath
+  )
+
+  $inGenres = $false
+  foreach ($line in Get-Content -LiteralPath $MetadataPath -Encoding UTF8) {
+    if ($line -match '^\s*genres\s*:\s*$') {
+      $inGenres = $true
+      continue
+    }
+
+    if ($inGenres -and $line -match '^\s*-\s*(.+?)\s*$') {
+      return $matches[1].Trim().Trim('"').Trim("'")
+    }
+
+    if ($inGenres -and $line -match '^\S') {
+      break
+    }
+  }
+
+  [Console]::Error.WriteLine("No genre found in: $MetadataPath")
+  exit 1
+}
+
+foreach ($source in @($pdfSource, $backCoverSource, $coverSource, $lesEsclavesMetadataSource, $revillageMetadataSource, $revillageCoverSource)) {
   if (-not (Test-Path -LiteralPath $source)) {
     [Console]::Error.WriteLine("Writing source not found: $source")
     exit 1
@@ -76,6 +104,8 @@ New-Item -ItemType Directory -Path (Split-Path -Path $revillageCoverDestination 
 Copy-Item -LiteralPath $revillageCoverSource -Destination $revillageCoverDestination -Force
 
 $backCover = (Get-Content -LiteralPath $backCoverSource -Raw -Encoding UTF8).Trim()
+$lesEsclavesGenre = Read-FirstGenre -MetadataPath $lesEsclavesMetadataSource
+$revillageGenre = Read-FirstGenre -MetadataPath $revillageMetadataSource
 $coverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $coverSource).Hash.Substring(0, 12).ToLowerInvariant()
 $backCoverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $backCoverSource).Hash.Substring(0, 12).ToLowerInvariant()
 $revillageCoverVersion = (Get-FileHash -Algorithm SHA256 -LiteralPath $revillageCoverSource).Hash.Substring(0, 12).ToLowerInvariant()
@@ -83,6 +113,10 @@ $assetVersion = "$coverVersion$backCoverVersion"
 $writingData = [ordered]@{
   backCover = $backCover
   assetVersion = $assetVersion
+  genres = [ordered]@{
+    lesEsclaves = $lesEsclavesGenre
+    revillage = $revillageGenre
+  }
 }
 $writingDataJson = $writingData | ConvertTo-Json -Compress
 $writingDataScript = "window.portfolioWritingData = Object.freeze($writingDataJson);`n"
