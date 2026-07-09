@@ -34,6 +34,8 @@ d'abord le socle parent, puis ces regles locales pour les fichiers de ce depot.
   dans `Portfolio` avant publication.
 - Les genres, titres, couvertures et liens visibles doivent venir des sources
   canoniques synchronisees.
+- Quand un ecrit n'a pas encore de description source, afficher explicitement
+  `En cours` dans la carte au lieu d'inventer une description.
 - Pour les cartes projets, garder le texte lisible comme contenu normal; rendre
   cliquable seulement l'element demande par l'utilisateur quand il precise une
   cible comme un poster, une image ou un bouton.
