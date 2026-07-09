@@ -87,8 +87,7 @@ find "$worktree_root" -mindepth 1 -type d -empty -delete
 
 copy_required "$source_root/index.html" "$worktree_root/index.html"
 copy_required "$source_root/css/accueil.css" "$worktree_root/css/accueil.css"
-copy_required "$source_root/img/ReVillage_logo.png" "$worktree_root/img/ReVillage_logo.png"
-copy_required "$source_root/img/ReVillage_logo.webp" "$worktree_root/img/ReVillage_logo.webp"
+copy_required "$source_root/img/favicon.png" "$worktree_root/img/favicon.png"
 copy_required "$title_source" "$worktree_root/montage/img/titre.png"
 copy_required "$source_root/montage/img/logo-loup-garou-thiercelieux.png" "$worktree_root/montage/img/logo-loup-garou-thiercelieux.png"
 copy_required "$source_root/montage/img/Le_sanglot_des_cigales_Logo.png" "$worktree_root/montage/img/Le_sanglot_des_cigales_Logo.png"
@@ -97,7 +96,7 @@ copy_required "$source_root/montage/img/hinamizawa.jpg" "$worktree_root/montage/
 
 index_file="$worktree_root/index.html"
 css_file="$worktree_root/css/accueil.css"
-logo_version="$(asset_version "$worktree_root/img/ReVillage_logo.png")"
+favicon_version="$(asset_version "$worktree_root/img/favicon.png")"
 css_version="$(asset_version "$css_file")"
 title_version="$(asset_version "$worktree_root/montage/img/titre.png")"
 lgt_version="$(asset_version "$worktree_root/montage/img/logo-loup-garou-thiercelieux.png")"
@@ -105,13 +104,13 @@ higurashi_version="$(asset_version "$worktree_root/montage/img/Le_sanglot_des_ci
 background_version="$(asset_version "$worktree_root/montage/img/site-background.png")"
 hinamizawa_version="$(asset_version "$worktree_root/montage/img/hinamizawa.jpg")"
 
-node - "$index_file" "$css_file" "$logo_version" "$css_version" "$title_version" "$lgt_version" "$higurashi_version" "$background_version" "$hinamizawa_version" <<'NODE'
+node - "$index_file" "$css_file" "$favicon_version" "$css_version" "$title_version" "$lgt_version" "$higurashi_version" "$background_version" "$hinamizawa_version" <<'NODE'
 const fs = require('fs');
 
 const [
   indexFile,
   cssFile,
-  logoVersion,
+  faviconVersion,
   cssVersion,
   titleVersion,
   lgtVersion,
@@ -122,7 +121,7 @@ const [
 
 let index = fs.readFileSync(indexFile, 'utf8');
 index = index
-  .replace(/href="(?:\.\/|\/)?img\/ReVillage_logo\.png(?:\?v=[^"]*)?"/g, `href="./img/ReVillage_logo.png?v=${logoVersion}"`)
+  .replace(/href="(?:\.\/|\/)?img\/favicon\.png(?:\?v=[^"]*)?"/g, `href="./img/favicon.png?v=${faviconVersion}"`)
   .replace(/href="\.\/css\/accueil\.css(?:\?v=[^"]*)?"/g, `href="./css/accueil.css?v=${cssVersion}"`)
   .replace(/src="\.\/montage\/img\/titre\.png(?:\?v=[^"]*)?"/g, `src="./montage/img/titre.png?v=${titleVersion}"`)
   .replace(/src="\.\/montage\/img\/logo-loup-garou-thiercelieux\.png(?:\?v=[^"]*)?"/g, `src="./montage/img/logo-loup-garou-thiercelieux.png?v=${lgtVersion}"`)
