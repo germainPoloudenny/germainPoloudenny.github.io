@@ -32,6 +32,8 @@ d'abord le socle parent, puis ces regles locales pour les fichiers de ce depot.
 
 - Les images, PDF et textes importes depuis d'autres depots doivent etre copies
   dans `Portfolio` avant publication.
+- Les genres, titres, couvertures et liens visibles doivent venir des sources
+  canoniques synchronisees.
 - Pour les cartes projets, garder le texte lisible comme contenu normal; rendre
   cliquable seulement l'element demande par l'utilisateur quand il precise une
   cible comme un poster, une image ou un bouton.

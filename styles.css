@@ -46,6 +46,9 @@ body {
 
 p {
   max-width: 68ch;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 h1,
