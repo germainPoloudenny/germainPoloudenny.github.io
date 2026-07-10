@@ -13,14 +13,17 @@ d'abord le socle parent, puis ces regles locales pour les fichiers de ce depot.
   `../Ecrire` ou `../ReVillage`.
 - Les chemins locaux vers `Ecrire` ou `ReVillage` servent seulement de sources
   pour les scripts de synchronisation.
+- Pour Re:Village, la source publique consommee par le portfolio est
+  `../ReVillage/portfolio-presentation`; ne pas synchroniser depuis les dossiers
+  UE generes ni depuis `../ReVillage/ReVillage_to_migrate`.
 
 ## Publication Et Synchronisation
 
 - Utiliser `gacp` pour publier le portfolio quand l'utilisateur demande commit
   et push depuis ce depot.
-- `gacp` lance d'abord le `gacp` du depot `ReVillage`, puis synchronise les
-  assets publics necessaires depuis `Ecrire` et `ReVillage` avant de commit/push
-  le portfolio.
+- `gacp` lance d'abord le `gacp` du depot `ReVillage` s'il existe, puis
+  synchronise les assets publics necessaires depuis `Ecrire` et `ReVillage`
+  avant de commit/push le portfolio.
 - Ne pas pousser le depot `Ecrire` depuis un travail sur `Portfolio`.
 - Ne pas publier le depot complet `ReVillage` depuis un travail sur `Portfolio`;
   seule la branche publique `public-visible` peut etre mise a jour par la

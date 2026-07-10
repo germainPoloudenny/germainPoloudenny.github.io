@@ -11,26 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="revillage-page">
   <div class="background-accent" aria-hidden="true"></div>
-  <header class="site-header">
-    <a class="brand brand-link" href="index.html">Germain Poloudenny</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
-    <nav class="nav" id="site-nav">
-      <a href="index.html#intro">Intro</a>
-      <a href="index.html#skills">Compétences complémentaires</a>
-      <a href="index.html#diplomas">Diplômes</a>
-      <a href="index.html#experiences">Expériences</a>
-      <a href="index.html#articles">Articles</a>
-      <a class="active" href="index.html#projects" aria-current="page">Projets</a>
-      <a href="index.html#hobbies">Hobbies</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </header>
 
   <main class="revillage-main">
     <section class="revillage-hero" aria-labelledby="revillageTitle">
@@ -65,16 +47,6 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('js');
-
-      const nav = document.querySelector('.nav');
-      const navToggle = document.querySelector('.nav-toggle');
-
-      if (nav && navToggle) {
-        navToggle.addEventListener('click', () => {
-          const isOpen = nav.classList.toggle('is-open');
-          navToggle.setAttribute('aria-expanded', String(isOpen));
-        });
-      }
 
       const revealTargets = document.querySelectorAll('.revillage-hero, .revillage-concept, .revillage-play-section');
       const observer = new IntersectionObserver(

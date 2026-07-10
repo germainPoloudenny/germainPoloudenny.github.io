@@ -8,6 +8,7 @@ revillage_portfolio_sync_script="$repo_root/scripts/sync-revillage-portfolio-ass
 revillage_sync_script="$repo_root/scripts/sync-revillage-public.sh"
 revillage_root="$projects_root/ReVillage"
 revillage_gacp_script="$revillage_root/gacp"
+revillage_presentation_manifest="$revillage_root/portfolio-presentation/presentation.json"
 
 commit_message="${*:-update}"
 
@@ -70,8 +71,8 @@ fi
 current_branch="$(git branch --show-current)"
 remote_git push origin "$current_branch"
 
-if [ -d "$revillage_root/.git" ]; then
+if [ -f "$revillage_presentation_manifest" ]; then
   sh "$revillage_sync_script" "$revillage_root"
 else
-  echo "ReVillage repository not found at $revillage_root; skipped public-visible push." >&2
+  echo "ReVillage portfolio presentation not found at $revillage_presentation_manifest; skipped public-visible push." >&2
 fi

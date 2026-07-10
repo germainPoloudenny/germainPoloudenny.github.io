@@ -1418,12 +1418,24 @@ main {
   color: var(--accent-lime);
 }
 
+body.revillage-page {
+  padding: 0;
+}
+
+body.revillage-page .background-accent {
+  display: none;
+}
+
 .revillage-main {
   max-width: none;
+  width: 100vw;
   gap: 0;
-  margin-top: calc(var(--section-gap) * -0.4);
+  margin-top: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   border: 1px solid rgba(236, 190, 95, 0.2);
-  border-radius: calc(var(--radius) + 4px);
+  border-inline: 0;
+  border-radius: 0;
   overflow: hidden;
   background-color: #050302;
   background-image: url("img/revillage/site-background.png?v=f340160d2720");
@@ -1436,7 +1448,7 @@ main {
 .revillage-hero,
 .revillage-concept,
 .revillage-play-section {
-  min-height: min(100svh, 820px);
+  min-height: 100svh;
 }
 
 .revillage-hero {

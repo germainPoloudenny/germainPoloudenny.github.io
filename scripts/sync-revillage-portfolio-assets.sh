@@ -4,18 +4,13 @@ set -eu
 repo_root="$(git rev-parse --show-toplevel)"
 projects_root="$(dirname "$repo_root")"
 revillage_root="${1:-$projects_root/ReVillage}"
-source_root="$revillage_root/web"
-poster_source="$revillage_root/montage/img/poster.png"
+presentation_root="$revillage_root/portfolio-presentation"
+presentation_manifest="$presentation_root/presentation.json"
 poster_destination="$repo_root/img/revillage-poster.png"
 revillage_asset_dir="$repo_root/img/revillage"
 index_file="$repo_root/index.html"
 revillage_page="$repo_root/revillage.html"
 styles_file="$repo_root/styles.css"
-title_source="$source_root/montage/img/titre.png"
-
-if [ -f "$revillage_root/montage/img/titre.png" ]; then
-  title_source="$revillage_root/montage/img/titre.png"
-fi
 
 asset_version() {
   asset="$1"
@@ -31,13 +26,50 @@ copy_required() {
   target_file="$2"
 
   if [ ! -f "$source_file" ]; then
-    echo "Required ReVillage portfolio asset missing: $source_file" >&2
+    echo "Required ReVillage portfolio presentation asset missing: $source_file" >&2
     exit 1
   fi
 
   mkdir -p "$(dirname "$target_file")"
   cp "$source_file" "$target_file"
 }
+
+if [ ! -f "$presentation_manifest" ]; then
+  echo "ReVillage portfolio presentation manifest not found at $presentation_manifest." >&2
+  exit 1
+fi
+
+manifest_asset_path() {
+  asset_key="$1"
+
+  node - "$presentation_manifest" "$presentation_root" "$asset_key" <<'NODE'
+const path = require('path');
+const fs = require('fs');
+
+const [manifestFile, presentationRoot, assetKey] = process.argv.slice(2);
+const manifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+const relativePath = manifest.assets?.[assetKey];
+
+if (!relativePath || typeof relativePath !== 'string') {
+  console.error(`ReVillage portfolio asset "${assetKey}" missing in: ${manifestFile}`);
+  process.exit(1);
+}
+
+if (path.isAbsolute(relativePath) || relativePath.split(/[\\/]+/).includes('..')) {
+  console.error(`ReVillage portfolio asset "${assetKey}" must stay inside portfolio-presentation: ${relativePath}`);
+  process.exit(1);
+}
+
+process.stdout.write(path.join(presentationRoot, relativePath));
+NODE
+}
+
+poster_source="$(manifest_asset_path poster)"
+title_source="$(manifest_asset_path title)"
+lgt_source="$(manifest_asset_path loupGarouLogo)"
+higurashi_source="$(manifest_asset_path higurashiLogo)"
+background_source="$(manifest_asset_path background)"
+hinamizawa_source="$(manifest_asset_path conceptBackground)"
 
 replace_required() {
   file="$1"
@@ -65,10 +97,10 @@ NODE
 mkdir -p "$(dirname "$poster_destination")"
 copy_required "$poster_source" "$poster_destination"
 copy_required "$title_source" "$revillage_asset_dir/titre.png"
-copy_required "$source_root/montage/img/logo-loup-garou-thiercelieux.png" "$revillage_asset_dir/logo-loup-garou-thiercelieux.png"
-copy_required "$source_root/montage/img/Le_sanglot_des_cigales_Logo.png" "$revillage_asset_dir/Le_sanglot_des_cigales_Logo.png"
-copy_required "$source_root/montage/img/site-background.png" "$revillage_asset_dir/site-background.png"
-copy_required "$source_root/montage/img/hinamizawa.jpg" "$revillage_asset_dir/hinamizawa.jpg"
+copy_required "$lgt_source" "$revillage_asset_dir/logo-loup-garou-thiercelieux.png"
+copy_required "$higurashi_source" "$revillage_asset_dir/Le_sanglot_des_cigales_Logo.png"
+copy_required "$background_source" "$revillage_asset_dir/site-background.png"
+copy_required "$hinamizawa_source" "$revillage_asset_dir/hinamizawa.jpg"
 
 poster_version="$(asset_version "$poster_destination")"
 title_version="$(asset_version "$revillage_asset_dir/titre.png")"
@@ -83,5 +115,44 @@ replace_required "$revillage_page" 'src="img/revillage/logo-loup-garou-thierceli
 replace_required "$revillage_page" 'src="img/revillage/Le_sanglot_des_cigales_Logo\.png(?:\?v=[^"]*)?"' "src=\"img/revillage/Le_sanglot_des_cigales_Logo.png?v=$higurashi_version\"" "ReVillage Higurashi logo"
 replace_required "$styles_file" 'url\("img/revillage/site-background\.png(?:\?v=[^"]*)?"\)' "url(\"img/revillage/site-background.png?v=$background_version\")" "ReVillage background"
 replace_required "$styles_file" 'url\("img/revillage/hinamizawa\.jpg(?:\?v=[^"]*)?"\)' "url(\"img/revillage/hinamizawa.jpg?v=$hinamizawa_version\")" "ReVillage concept background"
+
+node - "$revillage_page" "$presentation_manifest" <<'NODE'
+const fs = require('fs');
+
+const [revillagePage, presentationManifest] = process.argv.slice(2);
+const manifest = JSON.parse(fs.readFileSync(presentationManifest, 'utf8'));
+let page = fs.readFileSync(revillagePage, 'utf8');
+
+if (!manifest.pitch || typeof manifest.pitch !== 'string') {
+  console.error(`ReVillage portfolio pitch missing in: ${presentationManifest}`);
+  process.exit(1);
+}
+
+if (!manifest.play?.label || typeof manifest.play.label !== 'string') {
+  console.error(`ReVillage portfolio play label missing in: ${presentationManifest}`);
+  process.exit(1);
+}
+
+if (manifest.play.enabled && (!manifest.play.href || typeof manifest.play.href !== 'string')) {
+  console.error(`ReVillage portfolio play href missing in: ${presentationManifest}`);
+  process.exit(1);
+}
+
+page = page.replace(
+  /(<p id="revillageConceptTitle">\s*)[\s\S]*?(\s*<\/p>)/,
+  `$1${manifest.pitch}$2`
+);
+
+const playMarkup = manifest.play.enabled
+  ? `<a class="revillage-play-button" href="${manifest.play.href}">${manifest.play.label}</a>`
+  : `<button class="revillage-play-button" type="button" disabled>${manifest.play.label}</button>`;
+
+page = page.replace(
+  /<(?:a|button) class="revillage-play-button"[\s\S]*?<\/(?:a|button)>/,
+  playMarkup
+);
+
+fs.writeFileSync(revillagePage, page);
+NODE
 
 echo "Synced ReVillage portfolio assets"
