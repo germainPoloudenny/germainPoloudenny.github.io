@@ -1418,6 +1418,185 @@ main {
   color: var(--accent-lime);
 }
 
+.revillage-main {
+  max-width: none;
+  gap: 0;
+  margin-top: calc(var(--section-gap) * -0.4);
+  border: 1px solid rgba(236, 190, 95, 0.2);
+  border-radius: calc(var(--radius) + 4px);
+  overflow: hidden;
+  background-color: #050302;
+  background-image: url("img/revillage/site-background.png?v=f340160d2720");
+  background-position: top center;
+  background-repeat: repeat-y;
+  background-size: auto 800svh;
+  box-shadow: var(--shadow);
+}
+
+.revillage-hero,
+.revillage-concept,
+.revillage-play-section {
+  min-height: min(100svh, 820px);
+}
+
+.revillage-hero {
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  padding: clamp(1.5rem, 6vh, 4rem) clamp(1rem, 5vw, 4rem) clamp(1.25rem, 5vh, 2.5rem);
+  border-bottom: 1px solid rgba(236, 190, 95, 0.18);
+}
+
+.revillage-hero-content {
+  width: min(1180px, 98vw);
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.82);
+}
+
+.revillage-title {
+  margin: 0;
+}
+
+.revillage-title img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.revillage-concept {
+  display: flex;
+  align-items: center;
+  padding: clamp(3.25rem, 8vw, 6.5rem) 0;
+  background:
+    linear-gradient(90deg, rgba(5, 3, 2, 0.78) 0%, rgba(5, 3, 2, 0.52) 48%, rgba(5, 3, 2, 0.78) 100%),
+    linear-gradient(0deg, rgba(5, 3, 2, 0.82) 0%, rgba(5, 3, 2, 0.18) 44%, rgba(5, 3, 2, 0.72) 100%),
+    url("img/revillage/hinamizawa.jpg?v=3f545ad253a1") center / cover no-repeat;
+}
+
+.revillage-concept-inner {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.revillage-concept-copy p {
+  width: min(900px, 100%);
+  margin: 0;
+  color: #d9c0a1;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.65;
+  text-align: justify;
+  text-wrap: pretty;
+}
+
+.revillage-crossover-visual {
+  width: min(100%, 460px);
+  justify-self: end;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: clamp(0.35rem, 1.2vw, 0.8rem);
+}
+
+.revillage-crossover-visual img {
+  display: block;
+  width: auto;
+  justify-self: center;
+  object-fit: contain;
+}
+
+.revillage-crossover-lgt-logo {
+  max-width: min(100%, 400px);
+  max-height: 265px;
+}
+
+.revillage-crossover-higurashi-logo {
+  max-width: min(100%, 430px);
+  max-height: 170px;
+}
+
+.revillage-crossover-visual span {
+  color: #e9b85d;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  line-height: 0.85;
+  font-weight: 300;
+}
+
+.revillage-play-section {
+  display: grid;
+  place-items: center;
+  padding: clamp(3rem, 8vw, 7rem) 1rem;
+}
+
+.revillage-play-button {
+  position: relative;
+  display: inline-flex;
+  min-width: min(420px, 100%);
+  min-height: clamp(4.5rem, 10vw, 7rem);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(242, 202, 115, 0.9);
+  border-radius: 8px;
+  padding: 1rem clamp(2rem, 6vw, 5rem);
+  background: linear-gradient(180deg, rgba(42, 17, 14, 0.86), rgba(16, 7, 6, 0.92));
+  color: #fff1dc;
+  box-shadow:
+    0 0 46px rgba(182, 56, 50, 0.3),
+    0 28px 80px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(129, 32, 28, 0.9),
+    inset 0 0 34px rgba(182, 56, 50, 0.18);
+  font: inherit;
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.revillage-play-button::before {
+  content: "";
+  position: absolute;
+  inset: 0.45rem;
+  border: 1px solid rgba(242, 202, 115, 0.46);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.revillage-play-button::after {
+  content: "";
+  position: absolute;
+  inset: -1.25rem;
+  z-index: -1;
+  border-radius: 14px;
+  background: radial-gradient(circle, rgba(182, 56, 50, 0.24), rgba(182, 56, 50, 0) 68%);
+  pointer-events: none;
+}
+
+.revillage-play-button:disabled {
+  cursor: default;
+}
+
+@media (max-width: 900px) {
+  .revillage-concept-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .revillage-crossover-visual {
+    max-width: 520px;
+    justify-self: center;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .revillage-hero {
+    padding-top: clamp(1.25rem, 5vh, 2rem);
+  }
+}
+
 body.js .reveal {
   opacity: 0;
   transform: translateY(16px);
