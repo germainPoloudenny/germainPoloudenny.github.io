@@ -1,1 +1,0 @@
-# germainPoloudenny.github.io

@@ -45,20 +45,21 @@ remote_repo_path() {
   fi
 }
 
-if [ -d "$revillage_root/.git" ]; then
-  if [ ! -f "$revillage_gacp_script" ]; then
-    echo "ReVillage gacp script not found at $revillage_gacp_script." >&2
-    exit 1
-  fi
-
+if [ -d "$revillage_root/.git" ] && [ -f "$revillage_gacp_script" ]; then
   sh "$revillage_gacp_script" "$commit_message"
+elif [ -d "$revillage_root/.git" ]; then
+  echo "ReVillage gacp script not found at $revillage_gacp_script; skipped ReVillage branch push." >&2
 else
   echo "ReVillage repository not found at $revillage_root; skipped ReVillage branch push." >&2
 fi
 
 run_powershell
 
-sh "$revillage_portfolio_sync_script" "$revillage_root"
+if [ -f "$revillage_presentation_manifest" ]; then
+  sh "$revillage_portfolio_sync_script" "$revillage_root"
+else
+  echo "ReVillage portfolio presentation not found at $revillage_presentation_manifest; skipped portfolio asset sync." >&2
+fi
 
 git add -A
 
