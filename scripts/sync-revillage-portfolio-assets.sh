@@ -70,6 +70,8 @@ lgt_source="$(manifest_asset_path loupGarouLogo)"
 higurashi_source="$(manifest_asset_path higurashiLogo)"
 background_source="$(manifest_asset_path background)"
 hinamizawa_source="$(manifest_asset_path conceptBackground)"
+seer_card_source="$(manifest_asset_path seerCardTile)"
+seer_token_source="$(manifest_asset_path seerToken)"
 
 replace_required() {
   file="$1"
@@ -101,6 +103,8 @@ copy_required "$lgt_source" "$revillage_asset_dir/logo-loup-garou-thiercelieux.p
 copy_required "$higurashi_source" "$revillage_asset_dir/Le_sanglot_des_cigales_Logo.png"
 copy_required "$background_source" "$revillage_asset_dir/site-background.png"
 copy_required "$hinamizawa_source" "$revillage_asset_dir/hinamizawa.jpg"
+copy_required "$seer_card_source" "$revillage_asset_dir/voyante-tile.png"
+copy_required "$seer_token_source" "$revillage_asset_dir/voyante-token.png"
 
 poster_version="$(asset_version "$poster_destination")"
 title_version="$(asset_version "$revillage_asset_dir/titre.png")"
@@ -108,13 +112,17 @@ lgt_version="$(asset_version "$revillage_asset_dir/logo-loup-garou-thiercelieux.
 higurashi_version="$(asset_version "$revillage_asset_dir/Le_sanglot_des_cigales_Logo.png")"
 background_version="$(asset_version "$revillage_asset_dir/site-background.png")"
 hinamizawa_version="$(asset_version "$revillage_asset_dir/hinamizawa.jpg")"
+seer_card_version="$(asset_version "$revillage_asset_dir/voyante-tile.png")"
+seer_token_version="$(asset_version "$revillage_asset_dir/voyante-token.png")"
 
 replace_required "$index_file" 'src="img/revillage-poster\.png(?:\?v=[^"]*)?"' "src=\"img/revillage-poster.png?v=$poster_version\"" "ReVillage poster"
 replace_required "$revillage_page" 'src="img/revillage/titre\.png(?:\?v=[^"]*)?"' "src=\"img/revillage/titre.png?v=$title_version\"" "ReVillage title"
 replace_required "$revillage_page" 'src="img/revillage/logo-loup-garou-thiercelieux\.png(?:\?v=[^"]*)?"' "src=\"img/revillage/logo-loup-garou-thiercelieux.png?v=$lgt_version\"" "ReVillage Loup-Garou logo"
 replace_required "$revillage_page" 'src="img/revillage/Le_sanglot_des_cigales_Logo\.png(?:\?v=[^"]*)?"' "src=\"img/revillage/Le_sanglot_des_cigales_Logo.png?v=$higurashi_version\"" "ReVillage Higurashi logo"
+replace_required "$revillage_page" 'src="img/revillage/voyante-token\.png(?:\?v=[^"]*)?"' "src=\"img/revillage/voyante-token.png?v=$seer_token_version\"" "ReVillage seer token"
 replace_required "$styles_file" 'url\("img/revillage/site-background\.png(?:\?v=[^"]*)?"\)' "url(\"img/revillage/site-background.png?v=$background_version\")" "ReVillage background"
 replace_required "$styles_file" 'url\("img/revillage/hinamizawa\.jpg(?:\?v=[^"]*)?"\)' "url(\"img/revillage/hinamizawa.jpg?v=$hinamizawa_version\")" "ReVillage concept background"
+replace_required "$styles_file" 'url\("img/revillage/voyante-tile\.png(?:\?v=[^"]*)?"\)' "url(\"img/revillage/voyante-tile.png?v=$seer_card_version\")" "ReVillage seer card background"
 
 node - "$revillage_page" "$presentation_manifest" <<'NODE'
 const fs = require('fs');
@@ -125,6 +133,25 @@ let page = fs.readFileSync(revillagePage, 'utf8');
 
 if (!manifest.pitch || typeof manifest.pitch !== 'string') {
   console.error(`ReVillage portfolio pitch missing in: ${presentationManifest}`);
+  process.exit(1);
+}
+
+if (!manifest.role?.title || !manifest.role?.description) {
+  console.error(`ReVillage portfolio role content missing in: ${presentationManifest}`);
+  process.exit(1);
+}
+
+if (!Number.isFinite(manifest.cardEyes?.maxYawDegrees)
+  || !Number.isFinite(manifest.cardEyes?.maxPitchDegrees)
+  || !Number.isFinite(manifest.cardEyes?.trackingEase)) {
+  console.error(`ReVillage portfolio eye settings missing in: ${presentationManifest}`);
+  process.exit(1);
+}
+
+if (!Number.isInteger(manifest.cardGrid?.rowsPerViewport)
+  || manifest.cardGrid.rowsPerViewport <= 0
+  || !Number.isFinite(manifest.cardGrid?.oddRowOffsetRatio)) {
+  console.error(`ReVillage portfolio card grid settings missing in: ${presentationManifest}`);
   process.exit(1);
 }
 
@@ -141,6 +168,21 @@ if (manifest.play.enabled && (!manifest.play.href || typeof manifest.play.href !
 page = page.replace(
   /(<p id="revillageConceptTitle">\s*)[\s\S]*?(\s*<\/p>)/,
   `$1${manifest.pitch}$2`
+);
+
+page = page.replace(
+  /(<h2 id="revillageRoleTitle">)[\s\S]*?(<\/h2>)/,
+  `$1${manifest.role.title}$2`
+);
+
+page = page.replace(
+  /(<div class="revillage-role-copy">[\s\S]*?<p>\s*)[\s\S]*?(\s*<\/p>)/,
+  `$1${manifest.role.description}$2`
+);
+
+page = page.replace(
+  /(<section class="revillage-role" aria-labelledby="revillageRoleTitle")([^>]*)>/,
+  `$1 data-eye-max-yaw="${manifest.cardEyes.maxYawDegrees}" data-eye-max-pitch="${manifest.cardEyes.maxPitchDegrees}" data-eye-tracking-ease="${manifest.cardEyes.trackingEase}" data-card-rows="${manifest.cardGrid.rowsPerViewport}" data-card-odd-row-offset="${manifest.cardGrid.oddRowOffsetRatio}">`
 );
 
 const playMarkup = manifest.play.enabled
