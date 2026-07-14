@@ -92,6 +92,7 @@
           backCover: requiredWritingValue('backCover')
         },
         {
+          id: 'revillage-tome-1',
           cover: 'img/revillage-tome1.png?v=6f7271ac0bb6',
           title: 'Re:Village - Tome 1',
           genre: requiredWritingGenre('revillage'),
@@ -110,6 +111,7 @@
       if (writingsList && writings.length > 0) {
         writingsList.classList.add('has-items');
         writingsList.innerHTML = writings.map((writing) => {
+          const articleId = writing.id ? ` id="${escapeHtml(writing.id)}"` : '';
           const cover = `<img class="writing-cover" src="${writing.cover}" alt="Page de couverture de ${writing.title}">`;
           const coverBlock = writing.pdf
             ? `<a class="writing-cover-link" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Lire ${writing.title}">${cover}</a>`
@@ -131,7 +133,7 @@
           const isPreviewOnly = !writing.pdf && !writing.genre && !writing.backCover;
 
           return `
-            <article class="card writing-card${isPreviewOnly ? ' writing-card-preview' : ''}">
+            <article${articleId} class="card writing-card${isPreviewOnly ? ' writing-card-preview' : ''}">
               ${coverBlock}
               <div class="writing-content">
                 ${meta}
@@ -142,6 +144,12 @@
             </article>
           `;
         }).join('');
+
+        if (window.location.hash === '#revillage-tome-1') {
+          const revillageWriting = document.getElementById('revillage-tome-1');
+          if (!revillageWriting) throw new Error('Carte du roman Re:Village introuvable');
+          window.requestAnimationFrame(() => revillageWriting.scrollIntoView({ block: 'start' }));
+        }
       }
 
       const revealTargets = document.querySelectorAll('.hero, .panel, .panel-header');
