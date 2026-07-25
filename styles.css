@@ -239,6 +239,15 @@ main {
   margin: 8px 0 12px;
 }
 
+.hero-subtitle {
+  margin: -4px 0 18px;
+  color: var(--muted);
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 500;
+  text-align: left;
+}
+
 .hero-content {
   display: grid;
   grid-template-columns: minmax(200px, 260px) minmax(240px, 1fr);
