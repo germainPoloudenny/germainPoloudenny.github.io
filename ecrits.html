@@ -44,7 +44,7 @@
 
   </main>
 
-  <script src="data/les-esclaves-astre-noir.js?v=8ab2ee2fd285e52fa9bbc9db"></script>
+  <script src="data/les-esclaves-astre-noir.js?v=a6c3711deb306f2817cc9871"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('js');
@@ -86,9 +86,9 @@
       const writings = [
         {
           cover: `img/les-esclaves-astre-noir.png?v=${requiredWritingValue('assetVersion')}`,
-          title: "Les Esclaves - Tome 1 : L'Astre Noir",
+          title: requiredWritingValue('title'),
           genre: requiredWritingGenre('lesEsclaves'),
-          pdf: 'pdf/les-esclaves-t1-astre-noir.pdf',
+          pdf: `pdf/les-esclaves-t1-astre-noir.pdf?v=${requiredWritingValue('assetVersion')}`,
           backCover: requiredWritingValue('backCover')
         },
         {
@@ -112,16 +112,16 @@
         writingsList.classList.add('has-items');
         writingsList.innerHTML = writings.map((writing) => {
           const articleId = writing.id ? ` id="${escapeHtml(writing.id)}"` : '';
-          const cover = `<img class="writing-cover" src="${writing.cover}" alt="Page de couverture de ${writing.title}">`;
+          const cover = `<img class="writing-cover" src="${writing.cover}" alt="Page de couverture de ${escapeHtml(writing.title)}">`;
           const coverBlock = writing.pdf
-            ? `<a class="writing-cover-link" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Lire ${writing.title}">${cover}</a>`
+            ? `<a class="writing-cover-link" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Lire ${escapeHtml(writing.title)}">${cover}</a>`
             : `<div class="writing-cover-link">${cover}</div>`;
           const meta = writing.genre
             ? `<div class="meta"><span class="pill">${writing.genre}</span></div>`
             : '';
           const actions = writing.pdf
             ? `<div class="writing-actions">
-                <a class="paper-link writing-action pdf-action" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Ouvrir le PDF de ${writing.title}">
+                <a class="paper-link writing-action pdf-action" href="${writing.pdf}" target="_blank" rel="noreferrer noopener" aria-label="Ouvrir le PDF de ${escapeHtml(writing.title)}">
                   <img class="pdf-action-logo" src="img/pdf-document.png" alt="" aria-hidden="true">
                 </a>
               </div>`
@@ -137,7 +137,7 @@
               ${coverBlock}
               <div class="writing-content">
                 ${meta}
-                <h3>${writing.title}</h3>
+                <h3>${escapeHtml(writing.title)}</h3>
                 ${actions}
                 ${backCover}
               </div>

@@ -6,3 +6,7 @@ videos/*.mkv
 videos/*.tmp.mp4
 videos/*.original.mp4
 tools/
+__pycache__/
+.publication-state.json
+.publication-state.json.tmp
+.publication.lock

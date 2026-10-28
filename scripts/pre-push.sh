@@ -6,7 +6,7 @@ script="$repo_root/scripts/sync-roman-pdf.ps1"
 
 run_powershell() {
   if command -v pwsh >/dev/null 2>&1; then
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "$script"
+    pwsh -NoProfile -ExecutionPolicy Bypass -File "$script" -CheckGitStatus
     return
   fi
 
@@ -17,7 +17,7 @@ run_powershell() {
     powershell_script="$(wslpath -w "$script")"
   fi
 
-  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$powershell_script"
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$powershell_script" -CheckGitStatus
 }
 
 run_powershell
