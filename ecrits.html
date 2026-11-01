@@ -42,7 +42,8 @@
 
   </main>
 
-  <script src="data/les-esclaves-astre-noir.js?v=a6c3711deb306f2817cc9871"></script>
+  <script src="scripts/legacy-writing-links.js"></script>
+  <script src="data/les-esclaves-astre-noir.js?v=22d658105cfa"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('js');
@@ -90,10 +91,10 @@
           backCover: requiredWritingValue('backCover')
         },
         {
-          id: 'revillage-tome-1',
-          cover: 'img/revillage-tome1.png?v=6f7271ac0bb6',
-          title: 'Re:Village - Tome 1',
-          genre: requiredWritingGenre('revillage'),
+          id: 'lym-tome-1',
+          cover: 'img/lym-tome1.png?v=c58166ff0079',
+          title: 'Les Yeux de Minazac - Tome 1',
+          genre: requiredWritingGenre('lym'),
           backCover: 'En cours'
         }
       ];
@@ -143,10 +144,10 @@
           `;
         }).join('');
 
-        if (window.location.hash === '#revillage-tome-1') {
-          const revillageWriting = document.getElementById('revillage-tome-1');
-          if (!revillageWriting) throw new Error('Carte du roman Re:Village introuvable');
-          window.requestAnimationFrame(() => revillageWriting.scrollIntoView({ block: 'start' }));
+        if (window.location.hash === '#lym-tome-1') {
+          const lymWriting = document.getElementById('lym-tome-1');
+          if (!lymWriting) throw new Error('Carte du roman Les Yeux de Minazac introuvable');
+          window.requestAnimationFrame(() => lymWriting.scrollIntoView({ block: 'start' }));
         }
       }
 

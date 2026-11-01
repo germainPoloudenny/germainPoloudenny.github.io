@@ -4,8 +4,8 @@ set -eu
 repo_root="$(git rev-parse --show-toplevel)"
 projects_root="$(dirname "$repo_root")"
 sync_script="$repo_root/scripts/sync-roman-pdf.ps1"
-revillage_root="$projects_root/ReVillage"
-revillage_gacp_script="$revillage_root/gacp"
+lym_root="$projects_root/LesYeuxDeMinazac"
+lym_gacp_script="$lym_root/gacp"
 
 commit_message="${*:-update}"
 
@@ -42,12 +42,12 @@ remote_repo_path() {
   fi
 }
 
-if [ -d "$revillage_root/.git" ] && [ -f "$revillage_gacp_script" ]; then
-  sh "$revillage_gacp_script" "$commit_message"
-elif [ -d "$revillage_root/.git" ]; then
-  echo "ReVillage gacp script not found at $revillage_gacp_script; skipped ReVillage branch push." >&2
+if [ -d "$lym_root/.git" ] && [ -f "$lym_gacp_script" ]; then
+  sh "$lym_gacp_script" "$commit_message"
+elif [ -d "$lym_root/.git" ]; then
+  echo "Les Yeux de Minazac gacp script not found at $lym_gacp_script; skipped Les Yeux de Minazac branch push." >&2
 else
-  echo "ReVillage repository not found at $revillage_root; skipped ReVillage branch push." >&2
+  echo "Les Yeux de Minazac repository not found at $lym_root; skipped Les Yeux de Minazac branch push." >&2
 fi
 
 run_powershell
